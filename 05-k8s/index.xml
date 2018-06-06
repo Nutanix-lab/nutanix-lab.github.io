@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nutanix K8S相关功能 on Nutanix实验室</title>
+    <link>/05-k8s/</link>
+    <description>Recent content in Nutanix K8S相关功能 on Nutanix实验室</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    
+	<atom:link href="/05-k8s/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>一键安装K8S群集</title>
+      <link>/05-k8s/01-k8s-cluster/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/05-k8s/01-k8s-cluster/</guid>
+      <description>构建中&amp;hellip;.
+这个lab的目标：
+ 蓝图使用上面的CentOS7的模板镜像 在创建工作流里生成一个包含Hello World字符串的文件/helloworld.txt 这个蓝图可以生成自定义配置的n台虚拟机 运行这个蓝图生成3个虚拟机 使用Stop工作流，poweroff这三个虚拟机 使用Start工作流，poweron这三个虚拟机 使用Delete工作流删除这三个虚拟机实例  以上步骤的验收标准： 可以登录用户蓝图生成的vm，能看到目标的文件。 </description>
+    </item>
+    
+  </channel>
+</rss>

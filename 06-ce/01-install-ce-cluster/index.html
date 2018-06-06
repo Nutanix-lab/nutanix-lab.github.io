@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Nutanix实验室</title>
+    
+      <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="generator" content="Hugo 0.41" />
+
+<title>环境准备 :: Nutanix实验室</title>
+<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+<link href="/css/nucleus.css" rel="stylesheet">
+<link href="/css/font-awesome.min.css" rel="stylesheet">
+<link href="/css/hybrid.css" rel="stylesheet">
+<link href="/css/featherlight.min.css" rel="stylesheet">
+<link href="/css/auto-complete.css" rel="stylesheet">
+<link href="/theme-original/style.css" rel="stylesheet">
+
+  <link href="/theme-original/variant-green.css" rel="stylesheet">
+
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<script src="/js/jquery-2.x.min.js"></script>
+<style type="text/css">
+  :root #header + #content > #left > #rlblock_left {
+    display:none !important;
+  }
+</style>
+<script>
+  var _hmt = _hmt || [];
+  (function () {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?50c3a9ae6c51222b31df5510bbca479f";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+    
+  </head>
+  <body data-url="/06-ce/01-install-ce-cluster/">
+    
+      <div id="headermain"></div>
+<nav id="sidebar" class="showVisitedLinks">
+
+
+
+<div class="highlightable">
+  <div id="header-wrapper">
+    <div id="header">
+      
+	
+  
+    <p><img src="/nutanix.jpg" alt="Nutanix Calm" /></p>
+
+  
+
+    </div>
+        <div class="searchbox">
+		    <label for="search-by"><i class="fa fa-search"></i></label>
+		    <input data-search-input id="search-by" type="text" placeholder="">
+		    <span data-search-clear=""><i class="fa fa-close"></i></span>
+		</div>
+		<script type="text/javascript" src="/js/lunr.min.js"></script>
+		<script type="text/javascript" src="/js/auto-complete.js"></script>
+		<script type="text/javascript">
+        
+            var baseurl = "\/";
+        
+		</script>
+		<script type="text/javascript" src="/js/search.js"></script>
+  </div>
+
+      <ul class="topics">
+            <li data-nav-id="/" class="dd-item">
+            <a href="/"><i class="fa fa-fw fa-home"></i></a>
+            </li>
+    <li data-nav-id="/00-getting-start/" class="dd-item">
+      <a href="/00-getting-start/">
+        <span>基本配置</span><i class="fa fa-angle-right fa-lg category-icon"></i><i class="fa fa-circle-thin read-icon"></i>
+      </a>
+        <ul>
+      <li data-nav-id="/00-getting-start/installation/" class="dd-item">
+        <a href="/00-getting-start/installation/">
+          <span>安装AHV群集</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/00-getting-start/configuration/" class="dd-item">
+        <a href="/00-getting-start/configuration/">
+          <span>配置和部署AD</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/01-prism-central/" class="dd-item">
+      <a href="/01-prism-central/">
+        <span>Prism Central</span><i class="fa fa-angle-right fa-lg category-icon"></i><i class="fa fa-circle-thin read-icon"></i>
+      </a>
+        <ul>
+      <li data-nav-id="/01-prism-central/00-deploy-pc/" class="dd-item">
+        <a href="/01-prism-central/00-deploy-pc/">
+          <span>部署Prism Central</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/01-prism-central/01-configure-pc/" class="dd-item">
+        <a href="/01-prism-central/01-configure-pc/">
+          <span>配置Prism Central</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/02-nucalm-basic/" class="dd-item">
+      <a href="/02-nucalm-basic/">
+        <span>Nutanix Calm基础功能</span><i class="fa fa-angle-right fa-lg category-icon"></i><i class="fa fa-circle-thin read-icon"></i>
+      </a>
+        <ul>
+      <li data-nav-id="/02-nucalm-basic/01-configure-calm/" class="dd-item">
+        <a href="/02-nucalm-basic/01-configure-calm/">
+          <span>初始化配置Calm</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/02-nucalm-basic/02-deploy-bp/" class="dd-item">
+        <a href="/02-nucalm-basic/02-deploy-bp/">
+          <span>导入Nutanix Calm商店里的蓝图</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/02-nucalm-basic/03-config-cat/" class="dd-item">
+        <a href="/02-nucalm-basic/03-config-cat/">
+          <span>配置服务目录</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/02-nucalm-basic/04-create-template/" class="dd-item">
+        <a href="/02-nucalm-basic/04-create-template/">
+          <span>创建虚拟机模板</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/03-nucalm-middle/" class="dd-item">
+      <a href="/03-nucalm-middle/">
+        <span>Nutanix Calm中级功能</span><i class="fa fa-angle-right fa-lg category-icon"></i><i class="fa fa-circle-thin read-icon"></i>
+      </a>
+        <ul>
+      <li data-nav-id="/03-nucalm-middle/01-helloworld/" class="dd-item">
+        <a href="/03-nucalm-middle/01-helloworld/">
+          <span>HelloWorld蓝图</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/03-nucalm-middle/02-3layer/" class="dd-item">
+        <a href="/03-nucalm-middle/02-3layer/">
+          <span>三层LAMP应用蓝图</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/03-nucalm-middle/03-ec2-demo/" class="dd-item">
+        <a href="/03-nucalm-middle/03-ec2-demo/">
+          <span>模拟AWS EC2蓝图</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/03-nucalm-middle/04-lamp-bp/" class="dd-item">
+        <a href="/03-nucalm-middle/04-lamp-bp/">
+          <span>LAMP技术堆栈蓝图</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/04-nucalm-advance/" class="dd-item">
+      <a href="/04-nucalm-advance/">
+        <span>Nutanix Calm高级功能</span><i class="fa fa-angle-right fa-lg category-icon"></i><i class="fa fa-circle-thin read-icon"></i>
+      </a>
+        <ul>
+      <li data-nav-id="/04-nucalm-advance/01-docker-swarm-cluster/" class="dd-item">
+        <a href="/04-nucalm-advance/01-docker-swarm-cluster/">
+          <span>一键安装Docker Swarm群集</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/04-nucalm-advance/02-owncloud-dvp/" class="dd-item">
+        <a href="/04-nucalm-advance/02-owncloud-dvp/">
+          <span>Docker Datacenter使用DVP持久存储</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/05-k8s/" class="dd-item">
+      <a href="/05-k8s/">
+        <span>Nutanix K8S相关功能</span><i class="fa fa-angle-right fa-lg category-icon"></i><i class="fa fa-circle-thin read-icon"></i>
+      </a>
+        <ul>
+      <li data-nav-id="/05-k8s/01-k8s-cluster/" class="dd-item">
+        <a href="/05-k8s/01-k8s-cluster/">
+          <span>一键安装K8S群集</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/06-ce/" class="dd-item parent">
+      <a href="/06-ce/">
+        <span>Nutanix CE安装和使用</span>
+            <i class="fa fa-angle-down fa-lg category-icon"></i><i class="fa fa-circle-thin read-icon"></i>
+      </a>
+        <ul>
+      <li data-nav-id="/06-ce/01-install-ce-cluster/" class="dd-item active">
+        <a href="/06-ce/01-install-ce-cluster/">
+          <span>环境准备</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/06-ce/02-setup/" class="dd-item">
+        <a href="/06-ce/02-setup/">
+          <span> 安装部署</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/06-ce/03-basic-ops/" class="dd-item">
+        <a href="/06-ce/03-basic-ops/">
+          <span>常用功能操作</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/06-ce/04-tips/" class="dd-item">
+        <a href="/06-ce/04-tips/">
+          <span>常用技巧</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+        </ul>
+    </li>
+
+
+
+        <section id="shortcuts">
+                <li class="" role=""><h3>更多</h3><a href="https://github.com/Nutanix-lab/lab-guide" target="_blank" rel="noopener"><i class='fa fa-github'></i> Github代码库</a></li>
+                <li class="" role=""><a href="/showcase" target="_blank" rel="noopener"><i class='fa fa-camera'></i>友情链接</a></li>
+                <li class="" role=""><a href="http://nutnaix.martinliu.cn/" target="_blank" rel="noopener"><i class='fa fa-bookmark'></i> Nutanix实验室</a></li>
+                <li class="" role=""><a href="/credits" target="_blank" rel="noopener"><i class='fa fa-bullhorn'></i> Credits</a></li>
+        </section>
+            <a id="clear-history" class="" href="#" data-clear-history-toggle=""><i class="fa  fa-history"></i> </a>
+
+    <hr />
+    <li></li>
+    
+    </ul>
+
+ <section id="footer"><center>
+
+<a class="github-button" href="https://github.com/Nutanix-lab/lab-guide/archive/master.zip" data-icon="octicon-cloud-download" aria-label="Download Nutanix Lab docs on GitHub">Download</a>
+
+
+<a class="github-button" href="https://github.com/Nutanix-lab/lab-guide" data-icon="octicon-star" data-show-count="false" aria-label="Star Nutanix Lab Docs on GitHub">Star</a>
+
+
+<a class="github-button" href="https://github.com/Nutanix-lab/lab-guide/fork" data-icon="octicon-repo-forked" data-show-count="true" aria-label="Fork Nutanix Lab Docs on GitHub">Fork</a>
+
+
+</center>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+    </section>
+  </div>
+</nav>
+
+
+
+<section id="body">
+<div id="overlay"></div>
+<div class="padding highlightable">
+
+  <div id="top-bar">
+    
+      
+      
+      
+    <div id="top-github-link">
+      <a class="github-link" href="https://github.com/Nutanix-lab/lab-guide/edit/master/content06-ce/01-Install-ce-cluster.md" target="blank">
+        <i class="fa fa-code-fork"></i>
+        
+      </a>
+    </div><div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+        <span id="sidebar-toggle-span">
+          <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+            <i class="fa fa-bars"></i>
+          </a>
+        </span>
+        <span id="toc-menu"><i class="fa fa-list-alt"></i></span>
+        <span class="links">
+        
+
+
+
+
+
+
+
+ <a href='/'>Nutanix实验室</a> > <a href='/06-ce/'>Nutanix CE安装和使用</a> > 环境准备
+
+ 
+
+ 
+
+   
+        </span>
+    </div>
+    
+    
+    <div class="progress">
+        <div class="wrapper">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#硬件要求">硬件要求</a></li>
+<li><a href="#硬件兼容型号举例">硬件兼容型号举例</a></li>
+<li><a href="#软件准备">软件准备</a></li>
+</ul></li>
+</ul>
+</nav>
+        </div>
+    </div>
+    
+
+  </div>
+
+
+<div id="body-inner">
+  
+    <h1>环境准备</h1>
+  
+
+
+
+    
+    
+    
+    
+
+<p>这个lab的目标：</p>
+
+<ol>
+<li>选择兼容的硬件</li>
+<li>准备好社区登录账户</li>
+</ol>
+
+<h2 id="硬件要求">硬件要求</h2>
+
+<p>Nutanix CE版本支持两种平台部署方式，一种是部署在物理服务器上，另外一种可以以虚拟机的形式部署。以下是使用Community Edition已经测试的过硬件配置建议。但是，与其他Community Edition用户一样，您可能会发现其他硬件和推荐的类型一样可以兼容，包含，但不仅限于以下硬件平台：</p>
+
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>推荐配置</th>
+<th>说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>CPU</td>
+<td>Intel CPUs 支持 VT-x</td>
+<td>至少配置4核; 2核给 Controller VM 专用</td>
+</tr>
+
+<tr>
+<td>内存</td>
+<td>至少16 GB，每个节点的CVM虚拟机，如果开启去重/压缩功能需要额外的内存开消。</td>
+<td>如果想要使用AOS的去重和压缩功能，或者创建更多的虚拟机时，强烈建设配置32 GB </td>
+</tr>
+
+<tr>
+<td>网卡</td>
+<td>基于Intel的网卡</td>
+<td>一些 Community Edition 用户使用Broadcom 网卡也有成功的.</td>
+</tr>
+
+<tr>
+<td>HBA卡</td>
+<td>Community Edition支持(AHCI) SATA, 或 LSI 控制器: * IT 模式 (Nutanix测试显示IT模式的性能优于IR模式) * IR 直通模式 * IR RAID-0模式</td>
+<td></td>
+</tr>
+
+<tr>
+<td>存储设备</td>
+<td>每个节点的SSD/HDD数据最多为4块</td>
+<td>有些Community Edition 用户也有超过4个设备的成功案例</td>
+</tr>
+
+<tr>
+<td>冷数据层</td>
+<td>不低于500 GB, 最大 18 TB (3 x 6 TB HDDs)</td>
+<td>用于冷数据存储的HDD 或 SSD</td>
+</tr>
+
+<tr>
+<td>热数据层</td>
+<td>单个不低于200 GB SSD</td>
+<td>将SSD(s)放在HDD之前(通常为0或1) 第一个槽位数字取决于制造商的标签。不支持基于NVMe的驱动器</td>
+</tr>
+
+<tr>
+<td>引导分区</td>
+<td>每节点一个8 GB 以上的设备. 可以是内置的，也可以是外置的</td>
+<td>Nutanix已经成功测试过并使用了外部的USB设备和内部设备，比如SATA DOM 。建议使用USB 3.0 设备. 注意:如果你使用USB驱动器，在任何时候，不要删除USB驱动器。</td>
+</tr>
+
+<tr>
+<td>固件</td>
+<td>考虑为您将在Community Edition中使用的任何设备或硬件更新固件，以获得硬件供应商推荐的最新版本或建议版本。</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="硬件兼容型号举例">硬件兼容型号举例</h2>
+
+<table>
+<thead>
+<tr>
+<th>品牌</th>
+<th>配置</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Cisco</td>
+<td>Cisco UCS C220 M3 ; CPU: Intel Xeon E5-2609v2 2.5GHz ; RAM: 24GB DDR3 ; SSD: Cisco Enterprise Value SSD - 240 GB; HDD: Cisco - 500 GB - 2.5&rdquo; SFF - SATA 6Gb/s - 7200 rpm ; NIC: Broadcom NetXtreme II 5709</td>
+</tr>
+
+<tr>
+<td>Dell</td>
+<td>Dell PowerEdge R220; CPU: Intel Xeon E3-1220v3 3.1GHz; RAM: 32GB DDR3; SSD: Kingston SSDNow E50 - 480GB; HDD: 7.2k RPM SATA 3Gbps 2.5in - 1TB; NIC: On-Board LOM 1GBE (LAN on Motherboard)</td>
+</tr>
+
+<tr>
+<td>HP</td>
+<td>HP ProLiant DL320e Gen8 v2； CPU: Intel Xeon E3-1220v3 3.1GHz；RAM: 32GB DDR3；SSD: Kingston SSDNow E50 - SSD - 240 GB；HDD: HP Midline HDD - 500 GB - SATA 6Gb/s - 7200 rpm；NIC: HP Ethernet 1Gb 2-port NC332i Adapter</td>
+</tr>
+
+<tr>
+<td>SuperMicro</td>
+<td>SuperMicro SuperServer 1018D-73MTF；CPU: Intel Xeon E3-­1220v3 3.1GHz；RAM: 32GB DDR3；SSD: Seagate Pulsar.2 Enterprise SAS SSD - 200GB；HDD: Seagate Constellation.2 SATA 6Gb/s 7.2K RPM 64M - 500GB；NIC: Intel I210AT - Dual Gigabit Ethernet LAN</td>
+</tr>
+</tbody>
+</table>
+
+<p>如果服务器不在以上的列表中，也可以查看以下链接：</p>
+
+<p><a href="http://next.nutanix.com/t5/Discussion-Forum/Post-your-hardware-config/m-p/3249#U3249">http://next.nutanix.com/t5/Discussion-Forum/Post-your-hardware-config/m-p/3249#U3249</a></p>
+
+<p>查找是否有兼容的型号。</p>
+
+<h2 id="软件准备">软件准备</h2>
+
+<p>国外下载链接：</p>
+
+<p><a href="https://s3.amazonaws.com/ntnx-portal/ce/2017.07.21/ce-2017.07.20-stable.img.gz">https://s3.amazonaws.com/ntnx-portal/ce/2017.07.21/ce-2017.07.20-stable.img.gz</a></p>
+
+<p>国内网盘下载链接：</p>
+
+<p><a href="https://share.weiyun.com/d14f3d74680d553bcad0ab4b9b073614">https://share.weiyun.com/d14f3d74680d553bcad0ab4b9b073614</a></p>
+
+<p>百度网盘链接:<a href="https://pan.baidu.com/s/1hsMpfla"> https://pan.baidu.com/s/1hsMpfla </a>密码: f7q4</p>
+
+<div class="alert 
+alert-warning"
+ 
+role="alert"><strong>以上步骤的验收标准：</strong> 准备好可以安装CE的硬件和软件。</div>
+
+
+
+    
+    
+          <footer class=" footline" >
+	
+</footer>
+  </div>
+</div>
+
+<div id="navigation">
+<a class="nav nav-prev" href="/06-ce/" title="Nutanix CE安装和使用"> <i class="fa fa-chevron-left"></i></a>
+    <a class="nav nav-next" href="/06-ce/02-setup/" title=" 安装部署" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a></div>
+
+</section>
+<div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+  <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+</div>    
+
+<script src="/js/clipboard.min.js"></script>
+<script src="/js/featherlight.min.js"></script>
+<script src="/js/html5shiv-printshiv.min.js"></script>
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="/js/modernizr.custom.71422.js"></script>
+<script src="/js/docdock.js"></script>
+<script src="/theme-original/script.js"></script>
+
+
+    
+
+    
+    
+
+    
+  </body>
+</html>

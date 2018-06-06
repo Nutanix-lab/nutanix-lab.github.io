@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nutanix Calm高级功能 on Nutanix实验室</title>
+    <link>/04-nucalm-advance/</link>
+    <description>Recent content in Nutanix Calm高级功能 on Nutanix实验室</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    
+	<atom:link href="/04-nucalm-advance/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>一键安装Docker Swarm群集</title>
+      <link>/04-nucalm-advance/01-docker-swarm-cluster/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/04-nucalm-advance/01-docker-swarm-cluster/</guid>
+      <description>构建中&amp;hellip;.
+这个lab的目标：
+ 蓝图使用上面的CentOS7的模板镜像 在创建工作流里生成一个包含Hello World字符串的文件/helloworld.txt 这个蓝图可以生成自定义配置的n台虚拟机 运行这个蓝图生成3个虚拟机 使用Stop工作流，poweroff这三个虚拟机 使用Start工作流，poweron这三个虚拟机 使用Delete工作流删除这三个虚拟机实例  为Docker Swarm群集配置Nutanix持久存储 本文介绍如何用Docker卷插件的方式，给Docker Swarm的群集挂载Nutanix存储。Nutanix Container Volume Plug-in 简称DVP，可以给容器提供数据持久化的功能。
+本文使用ownCloud网盘应用做功能测试。测试的过程如下，安装部署Docker Datacenter，配置好群集，在UCP的界面里调用DVP插件建持久的数据卷，建立ownCloud服务，部署和测试该服务。
+Nutanix DVP (Docker Volume Plug-in)安装和配置 这一部分描述DVP的安装部署过程，需要连接互联网；安装调试完毕之后，作虚拟机的镜像模板使用。这样Docker Swarm的其它节点也都不需要重复这个步骤了。
+本文使用的是Docker社区文档稳定版 17.03.1-ce ；本文使用的OS是CentOS 7.3。所Docker安装的版本如下：
+[root@centos7-temp]# docker version Client: Version: 17.03.1-ce API version: 1.27 Go version: go1.7.5 Git commit: c6d412e Built: Mon Mar 27 17:05:44 2017 OS/Arch: linux/amd64 Server: Version: 17.03.1-ce API version: 1.27 (minimum version 1.12) Go version: go1.7.5 Git commit: c6d412e Built: Mon Mar 27 17:05:44 2017 OS/Arch: linux/amd64 Experimental: false [root@centos7-temp]# rpm -qa|grep docker docker-ce-17.</description>
+    </item>
+    
+    <item>
+      <title>Docker Datacenter使用DVP持久存储</title>
+      <link>/04-nucalm-advance/02-owncloud-dvp/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/04-nucalm-advance/02-owncloud-dvp/</guid>
+      <description>Docker宣布Docker Datacenter（简称DDC）正式发布，这套可集成的端到端平台设计用于高效地将应用程序开发和管理工作由内部数据中心迁移至云环境下。
+在Docker Datacenter的帮助下，企业将能够立足于内部或者虚拟私有云环境实现容器即服务（简称CaaS）的部署工作。CaaS能够提供一整套IT管理及安全应用的内容与基础设施环境，开发人员则以此为基础通过自助服务模式实现应用程序的构建与部署。
+Docker Datacenter当中包含一系列领先的Docker开源项目、商用软件并同大量经过验证并受到支持配置相集成：
+ Universal Control Plane (UCP) 1.0，嵌入Swarm以实现对Docker环境的管理与编排能力。 Trusted Registry (DTR) 1.4.3，用于实现Docker镜像管理、安全保护与协作。 Docker Engine 1.10对强大的container runtime提供商业支持。  本文介绍如何用Docker卷插件的方式，给Docker DDC的Swarm的群集挂载Nutanix存储。Nutanix Container Volume Plug-in 简称DVP，可以给容器提供数据持久化的功能。
+本文使用ownCloud网盘应用做功能测试。测试的过程如下，安装部署Docker Datacenter，配置好群集，在UCP的界面里调用DVP插件建持久的数据卷，建立ownCloud服务，部署和测试该服务。
+这个lab的目标：
+ 在CentOS7的模板镜像虚拟机里安装配置Nutanix DVP 部署和配置DDC，包括UCP，DTR和worker节点 在UCP里配置DVP持久存储 在DTR里上传OwnCloud镜像 在DDC的Docker Swarm集群里部署OwnCloud 测试OwnCloud的功能 对OwnCloud的容器做摧毁性测试，验证数据的持久性  Docker服务的安装和配置 这一部分描述DVP的安装部署过程，需要连接互联网；安装调试完毕之后，将虚拟机的制作成新的镜像模板待用。这样就能是DDC里的所有节点不重复配置DVP。
+先在模板虚拟机里安装Docker服务，Docker服务的安装方法见Docker的官方文档。
+Docker安装的参考命令如下：
+$ sudo yum install -y yum-utils \ device-mapper-persistent-data \ lvm2 $ sudo yum-config-manager \ --add-repo \ https://download.docker.com/linux/centos/docker-ce.repo $ sudo yum install docker-ce $ sudo systemctl start docker $ sudo systemctl enable docker  本文使用的是Docker社区文档稳定版 17.</description>
+    </item>
+    
+  </channel>
+</rss>

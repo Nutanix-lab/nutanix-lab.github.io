@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nutanix实验室</title>
+    <link>/</link>
+    <description>Recent content on Nutanix实验室</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 24 Apr 2017 18:36:24 +0200</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>HelloWorld蓝图</title>
+      <link>/03-nucalm-middle/01-helloworld/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/03-nucalm-middle/01-helloworld/</guid>
+      <description>这个lab的目标：
+ 蓝图使用上面的CentOS7的模板镜像 在创建工作流里生成一个包含Hello World字符串的文件/helloworld.txt 这个蓝图可以生成自定义配置的n台虚拟机 运行这个蓝图生成3个虚拟机 使用Stop工作流，poweroff这三个虚拟机 使用Start工作流，poweron这三个虚拟机 使用Delete工作流删除这三个虚拟机实例  操作步骤如下。
+点击左侧的第二个蓝图按钮，点击 创建应用蓝图 按钮。 选择这个蓝图部署的项目名称，点击处理按钮。 点击配置按钮，填写应用配置信息。 填写蓝图名称和描述。 点击Credentials按钮，输入一个root用户信息，用于登录自动化生成的虚拟机，例如 root / nutanix/4u , 输入完密码后再空白处点击一下，在点击密码框中右侧的眼睛按钮，确认保存的密码。点击 back按钮。 点击 Save 按钮保存当前的配置，其实也是检查当前配置信息的正确性，否则保存不会成功。 点击右下角的Create按钮，配置创建工作流，输入如图所示的信息。选择的 Image 模板名称是上个步骤里生成的模板。
+选择该蓝图的这个服务VM的配置信息，包括用于ssh登录的账户信息。 点击 save 按钮保存蓝图配置，点击Launch按钮，部署这个蓝图。 输入此次应用部署的名称，点击 create 按钮。 观察当前这个蓝图部署的状态。 点击 Manager ，点击 Create 创建工作流右侧的眼睛按钮，查看当前自动化工作流执行的进度和状态。 全部都是绿色表示一切正常。 在PC的虚拟机查看控制台刚才的部署生成的vm和它的状态。 SSH登录到这个虚拟机，运行下面的命令查看目标的文件是否部署成功。
+[root@localhost ~]# ls / bin etc lib mnt root srv usr boot helloworld.txt lib64 opt run sys var dev home media proc sbin tmp [root@localhost ~]# cat /helloworld.</description>
+    </item>
+    
+    <item>
+      <title>一键安装Docker Swarm群集</title>
+      <link>/04-nucalm-advance/01-docker-swarm-cluster/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/04-nucalm-advance/01-docker-swarm-cluster/</guid>
+      <description>构建中&amp;hellip;.
+这个lab的目标：
+ 蓝图使用上面的CentOS7的模板镜像 在创建工作流里生成一个包含Hello World字符串的文件/helloworld.txt 这个蓝图可以生成自定义配置的n台虚拟机 运行这个蓝图生成3个虚拟机 使用Stop工作流，poweroff这三个虚拟机 使用Start工作流，poweron这三个虚拟机 使用Delete工作流删除这三个虚拟机实例  为Docker Swarm群集配置Nutanix持久存储 本文介绍如何用Docker卷插件的方式，给Docker Swarm的群集挂载Nutanix存储。Nutanix Container Volume Plug-in 简称DVP，可以给容器提供数据持久化的功能。
+本文使用ownCloud网盘应用做功能测试。测试的过程如下，安装部署Docker Datacenter，配置好群集，在UCP的界面里调用DVP插件建持久的数据卷，建立ownCloud服务，部署和测试该服务。
+Nutanix DVP (Docker Volume Plug-in)安装和配置 这一部分描述DVP的安装部署过程，需要连接互联网；安装调试完毕之后，作虚拟机的镜像模板使用。这样Docker Swarm的其它节点也都不需要重复这个步骤了。
+本文使用的是Docker社区文档稳定版 17.03.1-ce ；本文使用的OS是CentOS 7.3。所Docker安装的版本如下：
+[root@centos7-temp]# docker version Client: Version: 17.03.1-ce API version: 1.27 Go version: go1.7.5 Git commit: c6d412e Built: Mon Mar 27 17:05:44 2017 OS/Arch: linux/amd64 Server: Version: 17.03.1-ce API version: 1.27 (minimum version 1.12) Go version: go1.7.5 Git commit: c6d412e Built: Mon Mar 27 17:05:44 2017 OS/Arch: linux/amd64 Experimental: false [root@centos7-temp]# rpm -qa|grep docker docker-ce-17.</description>
+    </item>
+    
+    <item>
+      <title>一键安装K8S群集</title>
+      <link>/05-k8s/01-k8s-cluster/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/05-k8s/01-k8s-cluster/</guid>
+      <description>构建中&amp;hellip;.
+这个lab的目标：
+ 蓝图使用上面的CentOS7的模板镜像 在创建工作流里生成一个包含Hello World字符串的文件/helloworld.txt 这个蓝图可以生成自定义配置的n台虚拟机 运行这个蓝图生成3个虚拟机 使用Stop工作流，poweroff这三个虚拟机 使用Start工作流，poweron这三个虚拟机 使用Delete工作流删除这三个虚拟机实例  以上步骤的验收标准： 可以登录用户蓝图生成的vm，能看到目标的文件。 </description>
+    </item>
+    
+    <item>
+      <title>初始化配置Calm</title>
+      <link>/02-nucalm-basic/01-configure-calm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/02-nucalm-basic/01-configure-calm/</guid>
+      <description> AWS账户的配置 由于Calm是多云管理，因此很多已经在Nutanix商店里的蓝图都支持AWS的部署，下面需要配置一个假的AWS账户信息，这样在使用预定义蓝图的时候减少提示信息出现的机会。
+App页面里，左侧齿轮图标，进入AWS账户配置页面，点击 Add Setting 按钮。
+在这个页面中输入任一的 Access Key ID 和 Secret Access Key 字符串。保证点击Save后正确地保存了一条记录即可。 配置Calm项目 点击左侧最下面的图标，进入项目配置页面，点击 Create Project 按钮。
+输入该项目的相关信息：
+ 项目名称：可以是一个应用开发团队，或者一个业务应用一个项目 用户和角色信息：下图设置 ssp_user 组里的所有人的角色是 Developer，可以设置其他的AD用户为其它各种的Role 选中 Local and Cloud Resource 选这个项目默认使用的AHV cluster，选中该项目所能使用的网络 输入该项目的资源配额 选中刚才输入的AWS账户  点击 Save 按钮之后，选中页面中的 环境 那个标签
+在这个页面的连个标签页面中输入必要的信息，这里需要配置一个root账户信息，可以是用户名密码的，用在Calm登录虚拟机的时候。
+以上步骤的验收标准： 使用PC的默认用户名和密码成功登陆新安装的PC。 </description>
+    </item>
+    
+    <item>
+      <title>安装AHV群集</title>
+      <link>/00-getting-start/installation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/00-getting-start/installation/</guid>
+      <description>AHV 20170830.58 需要最小的版本，这个版本是Nutanix Calm内置于PC中的起始版本。 安装配置好AHV Cluster，配置好两个服务IP，如下图所示。
+如果以上的数据服务IP不设置，在将AHV群集注册到PC里的时候会报错，而无法完成注册。
+以上步骤的验收标准： 能使用AHV群集默认的初始化密码登陆PE。 </description>
+    </item>
+    
+    <item>
+      <title>环境准备</title>
+      <link>/06-ce/01-install-ce-cluster/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/06-ce/01-install-ce-cluster/</guid>
+      <description>这个lab的目标：
+ 选择兼容的硬件 准备好社区登录账户  硬件要求 Nutanix CE版本支持两种平台部署方式，一种是部署在物理服务器上，另外一种可以以虚拟机的形式部署。以下是使用Community Edition已经测试的过硬件配置建议。但是，与其他Community Edition用户一样，您可能会发现其他硬件和推荐的类型一样可以兼容，包含，但不仅限于以下硬件平台：
+   组件 推荐配置 说明     CPU Intel CPUs 支持 VT-x 至少配置4核; 2核给 Controller VM 专用   内存 至少16 GB，每个节点的CVM虚拟机，如果开启去重/压缩功能需要额外的内存开消。 如果想要使用AOS的去重和压缩功能，或者创建更多的虚拟机时，强烈建设配置32 GB    网卡 基于Intel的网卡 一些 Community Edition 用户使用Broadcom 网卡也有成功的.   HBA卡 Community Edition支持(AHCI) SATA, 或 LSI 控制器: * IT 模式 (Nutanix测试显示IT模式的性能优于IR模式) * IR 直通模式 * IR RAID-0模式    存储设备 每个节点的SSD/HDD数据最多为4块 有些Community Edition 用户也有超过4个设备的成功案例   冷数据层 不低于500 GB, 最大 18 TB (3 x 6 TB HDDs) 用于冷数据存储的HDD 或 SSD   热数据层 单个不低于200 GB SSD 将SSD(s)放在HDD之前(通常为0或1) 第一个槽位数字取决于制造商的标签。不支持基于NVMe的驱动器   引导分区 每节点一个8 GB 以上的设备.</description>
+    </item>
+    
+    <item>
+      <title> 安装部署</title>
+      <link>/06-ce/02-setup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/06-ce/02-setup/</guid>
+      <description> 这个lab的目标：
+ 完成安装过程 启动和登录CE的Prism界面  物理环境部署 详细的说明参照官方文档：
+https://portal.nutanix.com/#/page/docs/details?targetId=Nutanix-Community-Edition-Getting-Started:Nutanix-Community-Edition-Getting-Started
+安装步骤如下所示：
+ 使用工具将CE镜像刷到U盘 https://www.osforensics.com/tools/write-usb-images.html 使用U盘启动机器 使用install用户进行配置 使用cluster create命令创建集群 首次访问Prism，必须保持网络连接，必须提前注册my.nutanix.com的账号用于身份验证  使用U盘引导之后的安装开始界面如下：
+使用Install用户登录，不需要输入密码；输入install按回车。
+选择键盘布局，使用Tab键选择“Proceed” 这将消除磁盘上的任何现有数据。
+输入IP地址信息
+Host IP: 10.68.69.101 CVM IP: 10.68.69.102 Netmask: 255.255.255.0 Gateway: 10.68.69.1 Single controller DNS: 8.8.8.8  注意：安装需要连接Internet；只有一个设备时需要在Create single-mode cluster打勾选择
+完成安装之后，按回车，重启服务器。
+虚拟机环境部署 这种在虚拟化环境中部署CE属于实验目的，如果已经完成了以上的硬件服务器部署，请忽略下文，进入下一个章节。
+安装指南:
+ 将CE镜像改为vmdk（如果是ESXi，使用vmkftools；如果是workstation，使用vmx文件） 使用install用户进行配置 使用cluster create命令创建集群 首次访问Prism，必须保持网络连接，必须提前注册my.nutanix.com的账号用于身份验证  以VMWare Workstation部署CE为例:
+解压ce-2017.07.20-stable.img.gz文件，你将得到一个名为“ce-2017.07.20-stable.img”的文件，将此文件改成“ce-flat.vmdk”。根据以下内容再创建名为ce.vmdk的描述文件。
+https://www.virtuallifestyle.nl/wp-content/uploads/2014/09/ce.txt
+新建一个虚拟机 设置虚拟机配置 添加磁盘 这是很关键的一步，对于VM的第一个磁盘，附加一个现有的SATA磁盘。选择上面创建的映像/磁盘描述符文件。 其它磁盘添加 除了第一个安装引导盘以外，再添加两块磁盘，第二块盘作为热数据层，第三块盘作为冷数据层。 启动虚拟机-开始安装 启动后，进行安装界面，安装方式跟之前物理环境中的过程一样。 访问Prism界面 输入CVM的IP地址，使用admin/admin登录Prism，并修改密码 按照提示使用my.nutanix.com的账号激活CE，此步骤需要访问Internet 激活成功后，开启你的HCI之旅吧！Enjoy it! 以上步骤的验收标准： 成功登陆Prism界面。 </description>
+    </item>
+    
+    <item>
+      <title>Docker Datacenter使用DVP持久存储</title>
+      <link>/04-nucalm-advance/02-owncloud-dvp/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/04-nucalm-advance/02-owncloud-dvp/</guid>
+      <description>Docker宣布Docker Datacenter（简称DDC）正式发布，这套可集成的端到端平台设计用于高效地将应用程序开发和管理工作由内部数据中心迁移至云环境下。
+在Docker Datacenter的帮助下，企业将能够立足于内部或者虚拟私有云环境实现容器即服务（简称CaaS）的部署工作。CaaS能够提供一整套IT管理及安全应用的内容与基础设施环境，开发人员则以此为基础通过自助服务模式实现应用程序的构建与部署。
+Docker Datacenter当中包含一系列领先的Docker开源项目、商用软件并同大量经过验证并受到支持配置相集成：
+ Universal Control Plane (UCP) 1.0，嵌入Swarm以实现对Docker环境的管理与编排能力。 Trusted Registry (DTR) 1.4.3，用于实现Docker镜像管理、安全保护与协作。 Docker Engine 1.10对强大的container runtime提供商业支持。  本文介绍如何用Docker卷插件的方式，给Docker DDC的Swarm的群集挂载Nutanix存储。Nutanix Container Volume Plug-in 简称DVP，可以给容器提供数据持久化的功能。
+本文使用ownCloud网盘应用做功能测试。测试的过程如下，安装部署Docker Datacenter，配置好群集，在UCP的界面里调用DVP插件建持久的数据卷，建立ownCloud服务，部署和测试该服务。
+这个lab的目标：
+ 在CentOS7的模板镜像虚拟机里安装配置Nutanix DVP 部署和配置DDC，包括UCP，DTR和worker节点 在UCP里配置DVP持久存储 在DTR里上传OwnCloud镜像 在DDC的Docker Swarm集群里部署OwnCloud 测试OwnCloud的功能 对OwnCloud的容器做摧毁性测试，验证数据的持久性  Docker服务的安装和配置 这一部分描述DVP的安装部署过程，需要连接互联网；安装调试完毕之后，将虚拟机的制作成新的镜像模板待用。这样就能是DDC里的所有节点不重复配置DVP。
+先在模板虚拟机里安装Docker服务，Docker服务的安装方法见Docker的官方文档。
+Docker安装的参考命令如下：
+$ sudo yum install -y yum-utils \ device-mapper-persistent-data \ lvm2 $ sudo yum-config-manager \ --add-repo \ https://download.docker.com/linux/centos/docker-ce.repo $ sudo yum install docker-ce $ sudo systemctl start docker $ sudo systemctl enable docker  本文使用的是Docker社区文档稳定版 17.</description>
+    </item>
+    
+    <item>
+      <title>三层LAMP应用蓝图</title>
+      <link>/03-nucalm-middle/02-3layer/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/03-nucalm-middle/02-3layer/</guid>
+      <description>本Lab的目标： * 使用一个下载的别人开发的蓝图 * 导入在自己的项目中 * 在本地项目的蓝图编辑器里修改成一个可以正常运行的蓝图 * 使用当前项目的配额测试和部署这个蓝图的应用 * 使用和测试蓝图中所定义的自动化运维流程 * 修改和增加自定义的应用服务自动化维护场景（可选）
+蓝图的下载地址：http://lab.digitalformula.net/calm-lab-3.0/blueprints/2017.12.06.LAMP.RC6.json.zip
+下载后解压缩得到蓝图的 json 文件。
+在App页面中点击左侧的第二个按钮，进入蓝图管理，点击 Upload Blueprint 按钮，通过上传的方式新建一个蓝图。点击后选择刚才下载的json蓝图文件。
+输入这个蓝图在本地的名称和部署的项目。点击 上传 按钮。 上传之后进入该蓝图的编辑模式，可以点击图中的红色感叹号，了解当前蓝图里必须修改的配置点。然后逐一检查和确认每一项配置，保证所有配置和当前的项目和资源池匹配。
+点击 Credentials 按钮，将密码更新为上述步骤中创建的模板机的root口令， Credentials name最好保持不变。点击空白处和密码查看的眼睛图标，确认密码应保存住了，点击 back 按钮。
+依次点击左下角Service清单中的三项服务，修改每项服务中的详细配置，如下图所示。 确保使用正确的登录密码信息。 点击保存按钮，确认整个蓝图的配置信息都是正确的，点击 Lunch 按钮部署这个蓝图。 输入这次蓝图部署的名称，点击Create按钮，创建这个部署。 在应用部署界面中观察 Create 工作流的执行状态。 在虚拟机控制台里观察虚拟机创建的状态和结果。 部署完毕之后可以范围 负载均衡 服务状态查看地址： http://10.21.11.55:8080/stats
+如果右下方的两个服务的状态都是UP的话，这表明整套服务部署成功了。然后访问 http://haproxy_vm_ip/ 浏览应用服务页面。
+以上步骤的验收标准： 可以登录用户蓝图生成的vm，能看到三层应用的Web界面。 </description>
+    </item>
+    
+    <item>
+      <title>导入Nutanix Calm商店里的蓝图</title>
+      <link>/02-nucalm-basic/02-deploy-bp/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/02-nucalm-basic/02-deploy-bp/</guid>
+      <description>Nutanix Calm商店是在公网上的，点击左侧的图标，如果当前的这个Cluster可以上互联网就可以看到如图所示的应用清单，这些是Nutanix已经测试打包好的应用蓝图。
+选择若干种应用蓝图，选中那些项目需要使用这个蓝图，点击 Apply 之后，点击 Publish按钮，这样这个蓝图就下载并且导入到了本地的Calm应用商店里。
+下图是导入完之后的结果，点击左侧最上面的按钮后，可以看到本地应用商店的状态。 以上步骤的验收标准： 本地的应用商店里获取到了可以部署的应用蓝图，这些蓝图是成功地从互联网上下载到本地。 </description>
+    </item>
+    
+    <item>
+      <title>配置和部署AD</title>
+      <link>/00-getting-start/configuration/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/00-getting-start/configuration/</guid>
+      <description>AD或者LDAP服务器是配置PC的必备的服务，在使用PC提供的自助服务门户的时候，需要使用AD作为用户认证的来源。
+工作内容包括：
+ 建立SSP（自助服务）所需要的组和用户 建立管理员组：ssp_admin 建立用户组： ssp_user 在这两个组里建立若干个测试用户，用于测试SSP中的不同角色。  以上工作内容贯彻了下面文档的所有步骤，作为一次WorkShop中的完整的配置。如果你使用已有的AD服务器，请参考以上配置，并不需要建立以上的用户和组。
+ 建立的组如下图所示：
+用户和组建立完成之后的结果如下图所示：
+以上步骤的验收标准： 记录新建/已有测试账户的用户名和密码，每一个账户都可以成功地登陆AD域。 </description>
+    </item>
+    
+    <item>
+      <title>常用功能操作</title>
+      <link>/06-ce/03-basic-ops/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/06-ce/03-basic-ops/</guid>
+      <description> 这个lab的目标：
+ 常见功能 Prism界面的基本使用  显示配置集群管理地址 点击左上角集群名称，可以显示集群详细信息以及配置集群管理地址： 更新用户信息 用于更新当前用户的联系方式，包括电子邮件地址 更改用户登录口令 REST API浏览器 查询所有Rest API接口 下载nCLI 下载命令行工具包nCLI，用于在windows或者其他支持Java平台的系统上可以通过命令行远程管理集群 解压之后在命令行中运行，即可连接到远程集群，执行管理命令，如：
+查询集群版本： 获取主机列表： 下载并安装windows Cmdlets工具包 下载Windows Cmdlets工具包，可以提供Windows管理员用熟悉的Powershell进行集群管理 技术支持中心网站 当需要寻求技术支持时，可以直接从Prism界面中打开技术支持中心网站，并登陆即可 打开文档中心网站 点击帮助时，可以打开在线的文档页面，查找所有Nutanix最新文档资料 集群健康检查功能演示 点击Health Tutorial即可通过动画方式详细了解Nutanix Health Check功能如何使用 打开Nutanix社区网站 点击Nutanix Next Community可以打开Nutanix社区网站寻求社区的协助 添加AD域用户登录验证 添加AD域名和验证的IP地址端口：ldap://10.91.233.78:389，可以使用AD进行用户验证 角色映射 可以将域账号中的角色映射为Nutanix的管理员用户或者普通用户 创建本地用户 可以创建其他管理员用户或者非管理员用户 使用域账号登陆 配置邮件服务器地址 配置邮件服务器地址用于发送告警邮件 配置告警邮件 配置发送告警邮件给管理员或者Nutanix Support 告警策略配置 针对不同告警，可以配置响应的告警策略通知管理员，避免发生告警风暴 网络文件系统白名单 允许特定网段的IP访问Nutanix存储 软件升级 简单的一键升级功能，可以同时支持升级NOS、Hypervisor、NCC和Firmware，并且实现无人值守升级过程。 字符界面也可以查看升级过程 自定义欢迎信息或者免责声明等 输入个性化欢迎信息或者免责声明，当用户打开网页即可看到该信息。 配置Nutanix的DNS服务器地址 输入DNS服务器地址 配置NTP服务器 输入NTP服务器地址 小结  Nutanix的Prism作为统一的管理接口，不仅可以管理服务器、存储等基础架构，并且可以实时监控Nutanix平台上所有虚拟机状态，用户可以通过一个界面完成日常监控、维护、快速故障定位和诊断、在线升级vSphere和NOS、告警管理、用户管理等日常操作 Nutanix更提供命令行接口和预定义Windows Cmdlets脚本，供高级用户开发自动化脚本以实现自动化运维操作 Nutanix提供的REST API接口可以方便的与其他监控系统进行整合，简化运维人员日常运维成本。Nutanix也提供SCOM整合的监控管理工具包，便于用户将与现有Microsoft SCOM监控平台进行对接  </description>
+    </item>
+    
+    <item>
+      <title>模拟AWS EC2蓝图</title>
+      <link>/03-nucalm-middle/03-ec2-demo/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/03-nucalm-middle/03-ec2-demo/</guid>
+      <description>这个lab的目标：
+ 蓝图使用上面的CentOS7的模板镜像 创建模仿AWS EC2虚拟机服务的蓝图 建立两种规格的虚拟机 可以设置虚拟机的其它各种参数  参考蓝图 可以在GitHub下载本文示例蓝图文件，网址：https://github.com/Nutanix-lab/calm。 下面是这个蓝图的关键配置讲解。
+应用基础配置 - Application Profile 在变量清单这里增加一个vm_hostname变量，设置初始值为vmhostname
+EC2服务配置 - 规格参数  配置VM Name，设置两个变量组成的虚拟机名称，用于在Prism里查询 配置 martin-centos-t1 为初始化的默认镜像，点亮右侧的小人，这样就可以使蓝图的使用者在运行这个蓝图的时候，选择这个参数的值，而不是预想定死的   添加一块数据盘，初始8GB，用户可变更 配置默认网络为vlan128，用户可变更（右侧小蓝人已经被点亮）  EC2服务配置 - 软件包安装  基于martin-centos-t1模板的预装软件包，如果有其它扩展安装和配置的可以把命令写在这里 这里使用了一个修改虚拟机主机名的操作  EC2服务配置 - 虚拟机副本数量  默认配置为1，用户运行时可变  测试EC2蓝图 在蓝图编辑器里点击右上角的Launch按钮。
+ 配置这次部署的应用名称 修改vm_hostname的名称为 xyz-bank 点击VM Configuration下面的EC2，在里面可以看到所有运行时可以变更的参数，找到参数：number of replicas ；修改默认的1位3； 点击右下角的 Create 按钮  观察测试结果 进入Application，点击右侧第三个图标；点击Manager，点击Create的右侧的眼睛的按钮。查看整个部署的过程。点击 Services Tab；观察已经创建的三个虚拟机的IP地址。
+进入Explore-&amp;gt; VM 在搜索栏输入 xyz 按回车，应该能看到以下三个虚拟机；
+点击其中的一个vm
+点击这个vm上面的console</description>
+    </item>
+    
+    <item>
+      <title>配置服务目录</title>
+      <link>/02-nucalm-basic/03-config-cat/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/02-nucalm-basic/03-config-cat/</guid>
+      <description>服务目录是为SSP用户提供的最基础的资源服务，下面是配置SSP用户可以访问到的ISO和磁盘镜像模板的方法。
+以SSP管理员用户身份登录。
+点击左侧的 Images ， 在镜像管理页面里，选择 Add Images 按钮，上传可以用于SSP的ISO和Disk镜像。选中其中需要通过服务目录展示给最终用户的镜像。 配置镜像在服务目录中看到的名字和描述。
+点击右侧的 Catalog Items 参考最后发布的效果。
+退出Admin用户，换SSP用户登录。下面是Developer用户角色能看到的内容。
+以上步骤的验收标准： 服务目录里的镜像可以供给SSP用户创建虚拟机。 </description>
+    </item>
+    
+    <item>
+      <title>LAMP技术堆栈蓝图</title>
+      <link>/03-nucalm-middle/04-lamp-bp/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/03-nucalm-middle/04-lamp-bp/</guid>
+      <description>这个lab的目标：
+ 蓝图使用上面的CentOS7的模板镜像 创建数据库、app、LB服务 设置服务的各种安装包 设置用于应用部署的变量参数  参考蓝图 可以在GitHub下载本文示例蓝图文件，网址：https://github.com/Nutanix-lab/calm，蓝图文件名：LAMP_colo.json。 下面是这个蓝图的关键配置讲解。
+下载上传本蓝图的步骤省略，参考本章前两篇文章。
+蓝图中的重点配置 设置量变量参数，用于参数化这个LAMP模板 * 配置MySQL数据库密码 * 变量 DEMO_COMP 用于初始化 Apache的默认首页的内容，扩展开去，你也可以设置为在Apache/Php服务器上部署的应用的代码的参数，如：下载网址等，这样就可以让这个蓝图自动化的部署目标运行的应用代码。
+ 数据库服务器的基础模板选择 martin-centos-t1 这里设定的是不可变 其它的虚拟机规格参数配置如EC2 Demo蓝图，参考上文。   这段脚本是数据库服务的数据安装命令 使用了应用级别的变量初始化MySQL数据库root口令   这段脚本是Apache服务的安装命令 使用了应用级别的变量初始化网站首页的内容，本例中及用于演示的目的 真实场景中，可以是一段动态的拉取应用代码吧的脚本，参数可以是应用的名称、版本和位置等。   Apache服务器在LB负载均衡器的后面，默认两个副本 副本数在部署的时候可选  蓝图的代码 数据库 #!/bin/bash set -ex # -*- Mysql installation #sudo yum install -y &amp;quot;http://repo.mysql.com/mysql-community-release-el7.rpm&amp;quot; sudo yum update -y sudo yum install -y mariadb-server mariadb sudo systemctl start mariadb sudo systemctl enable mariadb # -*- Mysql secure installation mysql -u root&amp;lt;&amp;lt;-EOF UPDATE mysql.</description>
+    </item>
+    
+    <item>
+      <title>创建虚拟机模板</title>
+      <link>/02-nucalm-basic/04-create-template/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/02-nucalm-basic/04-create-template/</guid>
+      <description>通过ISO光盘安装虚拟机 这个步骤是为测试Calm的蓝图做准备，安装一个CentOS 7 的虚拟机，并且把它转化成模板镜像。
+点击 Create VM 按钮，创建一个虚拟机。
+点击 Next 下面输入磁盘信息和CPU内存的配置信息。点 Save 按钮。 进入新创建虚拟机的控制台。
+在安装完的模板虚拟机里运行一下命令，方便后面的蓝图测试，把这些包装好，后面能更快速一些。
+yum install httpd mariadb-server mariadb php php-mysql php-gd nano wget bind-utils net-tools reboot  编辑 /etc/ssh/sshd_config 文件， 取消这一行的注释： PasswordAuthentication yes
+再次登录以后用 sys-unconfig 关机。 以下文档内容参考了 http://lab.digitalformula.net/；
+将测虚拟机磁盘转成模板镜像 ssh登录到AHV Cluster中的一个CVM。登录后执行acli命令，然后输入一下命令
+&amp;lt;acropolis&amp;gt; vm.get centos-tmp include_vmdisk_paths=1 centos-tmp { config { allow_live_migrate: True disk_list { addr { bus: &amp;quot;ide&amp;quot; index: 0 } cdrom: True device_uuid: &amp;quot;1fd10d29-0ac1-425d-99cc-ecffd6593fb2&amp;quot; empty: True } disk_list { addr { bus: &amp;quot;scsi&amp;quot; index: 0 } container_id: 418 container_uuid: &amp;quot;08e01b3e-1bfa-45e0-ba11-5155380e0b1f&amp;quot; device_uuid: &amp;quot;afe6d35e-97a1-4f16-976a-87fd4c702c2e&amp;quot; vmdisk_nfs_path: &amp;quot;/SelfServiceContainer/.</description>
+    </item>
+    
+    <item>
+      <title>常用技巧</title>
+      <link>/06-ce/04-tips/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/06-ce/04-tips/</guid>
+      <description> 这个lab的目标：
+ 在硬件受限制的时候调整cvm的规格 调整时区和时间 其它  调整时区和日期相关 调整Host或者CVM操作系统的时区、日期和时间等。
+参考命令如下：
+timedatectl set-timezone Asia/Shanghai timedatectl set-ntp true ntpq -p  调整CVM的内存 如果按照CE的机器内存很紧张，可以将CVM的内存降低，登陆到AHV的OS，参考命令如下：
+virsh shutdown NTNX-7aa2dd30-A-CVM virsh setmaxmem NTNX-7aa2dd30-A-CVM 10G --config virsh setmem NTNX-7aa2dd30-A-CVM 10G --config virsh start NTNX-7aa2dd30-A-CVM virsh dominfo NTNX-7aa2dd30-A-CVM  </description>
+    </item>
+    
+    <item>
+      <title>footer</title>
+      <link>/_footer/</link>
+      <pubDate>Mon, 24 Apr 2017 18:36:24 +0200</pubDate>
+      
+      <guid>/_footer/</guid>
+      <description>页脚说明</description>
+    </item>
+    
+    <item>
+      <title>header</title>
+      <link>/_header/</link>
+      <pubDate>Mon, 24 Apr 2017 18:36:24 +0200</pubDate>
+      
+      <guid>/_header/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Credits</title>
+      <link>/credits/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/credits/</guid>
+      <description> Github contributors  Martin Liu https://martinliu.cn  </description>
+    </item>
+    
+    <item>
+      <title>Nutanix技术粉丝的展示厅</title>
+      <link>/showcase/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/showcase/</guid>
+      <description> 提交您的网站链接给我，发邮件到 martin.liu@nutanix.com
+https://invincible.site/ 这是里应该是你的名字和网址链接 @shazic https://bitfan.io/ 这是里应该是你的名字和网址链接@vjeantet </description>
+    </item>
+    
+    <item>
+      <title>部署Prism Central</title>
+      <link>/01-prism-central/00-deploy-pc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/01-prism-central/00-deploy-pc/</guid>
+      <description>在AHV群集的管理界面PE里，点击左上角的第一个方格里的链接 “Register or create new”，在弹出的界面里，点击界面下部的上传安装包的选项，选择如下的两个文件，上传的界面如下所示。
+上传的文件为：
+ 5.5-prism_central.tar 5.5-prism_central_metadata.json  上传完毕之后点击安装按钮
+输入PC虚拟机的相关信息，如下图所示：
+注意可以勾选最下面的那个选项，把PC安装配置好之后一次性的把当前所操作的PE也一次性注册到PC中。 点击上图的部署按钮之后，大约需要半个小时的时间完成整个安装配置过程。
+在部署和配置PC的过程中，可以监控以下这两个任务的进度。
+安装部署完毕之后，在PE的界面中就可以看到PC的状态为OK。点击Launch链接。进入PC的登录界面，默认的用户名和密码是 admin / Nutanix/4u
+以上步骤的验收标准： 使用PC的默认用户名和密码成功登陆新安装的PC。 </description>
+    </item>
+    
+    <item>
+      <title>配置Prism Central</title>
+      <link>/01-prism-central/01-configure-pc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/01-prism-central/01-configure-pc/</guid>
+      <description>用新修改的admin密码登录之后，点击右上角的问号按钮。点击下面的Self Service &amp;amp; Apps链接，进入SSP的初始化配置界面。
+点击界面上的New Directory 按钮，配置和AD的集成。
+在配置页面里输入AD的项目信息，下面的AD的域名为zenlab.local；点击Next按钮。 进入SSP管理员配置页面，点击 Add Admins 按钮。
+在输入框里输入 ssp_a 即可自动搜索出之前创建的SSP管理员组。也可以使用已经由的AD用户和组，点击 Save。
+在网络配置里勾选默认群集中供SSP用户使用的网络。之后点击 Next 。
+在最后一个页面中勾选 Enable App Management ，点击 Finish 完成SSP的配置和App功能的启用。 以上配置的生效需要一个过程，大约需要十分钟左右的时间，可以在任务里观察这个任务的状态。
+以上步骤的验收标准： 上图中Enable App Management的100%成功完成。 </description>
+    </item>
+    
+  </channel>
+</rss>

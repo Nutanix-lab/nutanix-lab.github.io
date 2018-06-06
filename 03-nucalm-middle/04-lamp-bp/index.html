@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Nutanix实验室</title>
+    
+      <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="generator" content="Hugo 0.41" />
+
+<title>LAMP技术堆栈蓝图 :: Nutanix实验室</title>
+<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+<link href="/css/nucleus.css" rel="stylesheet">
+<link href="/css/font-awesome.min.css" rel="stylesheet">
+<link href="/css/hybrid.css" rel="stylesheet">
+<link href="/css/featherlight.min.css" rel="stylesheet">
+<link href="/css/auto-complete.css" rel="stylesheet">
+<link href="/theme-original/style.css" rel="stylesheet">
+
+  <link href="/theme-original/variant-green.css" rel="stylesheet">
+
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<script src="/js/jquery-2.x.min.js"></script>
+<style type="text/css">
+  :root #header + #content > #left > #rlblock_left {
+    display:none !important;
+  }
+</style>
+<script>
+  var _hmt = _hmt || [];
+  (function () {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?50c3a9ae6c51222b31df5510bbca479f";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+    
+  </head>
+  <body data-url="/03-nucalm-middle/04-lamp-bp/">
+    
+      <div id="headermain"></div>
+<nav id="sidebar" class="showVisitedLinks">
+
+
+
+<div class="highlightable">
+  <div id="header-wrapper">
+    <div id="header">
+      
+	
+  
+    <p><img src="/nutanix.jpg" alt="Nutanix Calm" /></p>
+
+  
+
+    </div>
+        <div class="searchbox">
+		    <label for="search-by"><i class="fa fa-search"></i></label>
+		    <input data-search-input id="search-by" type="text" placeholder="">
+		    <span data-search-clear=""><i class="fa fa-close"></i></span>
+		</div>
+		<script type="text/javascript" src="/js/lunr.min.js"></script>
+		<script type="text/javascript" src="/js/auto-complete.js"></script>
+		<script type="text/javascript">
+        
+            var baseurl = "\/";
+        
+		</script>
+		<script type="text/javascript" src="/js/search.js"></script>
+  </div>
+
+      <ul class="topics">
+            <li data-nav-id="/" class="dd-item">
+            <a href="/"><i class="fa fa-fw fa-home"></i></a>
+            </li>
+    <li data-nav-id="/00-getting-start/" class="dd-item">
+      <a href="/00-getting-start/">
+        <span>基本配置</span><i class="fa fa-angle-right fa-lg category-icon"></i><i class="fa fa-circle-thin read-icon"></i>
+      </a>
+        <ul>
+      <li data-nav-id="/00-getting-start/installation/" class="dd-item">
+        <a href="/00-getting-start/installation/">
+          <span>安装AHV群集</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/00-getting-start/configuration/" class="dd-item">
+        <a href="/00-getting-start/configuration/">
+          <span>配置和部署AD</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/01-prism-central/" class="dd-item">
+      <a href="/01-prism-central/">
+        <span>Prism Central</span><i class="fa fa-angle-right fa-lg category-icon"></i><i class="fa fa-circle-thin read-icon"></i>
+      </a>
+        <ul>
+      <li data-nav-id="/01-prism-central/00-deploy-pc/" class="dd-item">
+        <a href="/01-prism-central/00-deploy-pc/">
+          <span>部署Prism Central</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/01-prism-central/01-configure-pc/" class="dd-item">
+        <a href="/01-prism-central/01-configure-pc/">
+          <span>配置Prism Central</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/02-nucalm-basic/" class="dd-item">
+      <a href="/02-nucalm-basic/">
+        <span>Nutanix Calm基础功能</span><i class="fa fa-angle-right fa-lg category-icon"></i><i class="fa fa-circle-thin read-icon"></i>
+      </a>
+        <ul>
+      <li data-nav-id="/02-nucalm-basic/01-configure-calm/" class="dd-item">
+        <a href="/02-nucalm-basic/01-configure-calm/">
+          <span>初始化配置Calm</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/02-nucalm-basic/02-deploy-bp/" class="dd-item">
+        <a href="/02-nucalm-basic/02-deploy-bp/">
+          <span>导入Nutanix Calm商店里的蓝图</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/02-nucalm-basic/03-config-cat/" class="dd-item">
+        <a href="/02-nucalm-basic/03-config-cat/">
+          <span>配置服务目录</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/02-nucalm-basic/04-create-template/" class="dd-item">
+        <a href="/02-nucalm-basic/04-create-template/">
+          <span>创建虚拟机模板</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/03-nucalm-middle/" class="dd-item parent">
+      <a href="/03-nucalm-middle/">
+        <span>Nutanix Calm中级功能</span>
+            <i class="fa fa-angle-down fa-lg category-icon"></i><i class="fa fa-circle-thin read-icon"></i>
+      </a>
+        <ul>
+      <li data-nav-id="/03-nucalm-middle/01-helloworld/" class="dd-item">
+        <a href="/03-nucalm-middle/01-helloworld/">
+          <span>HelloWorld蓝图</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/03-nucalm-middle/02-3layer/" class="dd-item">
+        <a href="/03-nucalm-middle/02-3layer/">
+          <span>三层LAMP应用蓝图</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/03-nucalm-middle/03-ec2-demo/" class="dd-item">
+        <a href="/03-nucalm-middle/03-ec2-demo/">
+          <span>模拟AWS EC2蓝图</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/03-nucalm-middle/04-lamp-bp/" class="dd-item active">
+        <a href="/03-nucalm-middle/04-lamp-bp/">
+          <span>LAMP技术堆栈蓝图</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/04-nucalm-advance/" class="dd-item">
+      <a href="/04-nucalm-advance/">
+        <span>Nutanix Calm高级功能</span><i class="fa fa-angle-right fa-lg category-icon"></i><i class="fa fa-circle-thin read-icon"></i>
+      </a>
+        <ul>
+      <li data-nav-id="/04-nucalm-advance/01-docker-swarm-cluster/" class="dd-item">
+        <a href="/04-nucalm-advance/01-docker-swarm-cluster/">
+          <span>一键安装Docker Swarm群集</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/04-nucalm-advance/02-owncloud-dvp/" class="dd-item">
+        <a href="/04-nucalm-advance/02-owncloud-dvp/">
+          <span>Docker Datacenter使用DVP持久存储</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/05-k8s/" class="dd-item">
+      <a href="/05-k8s/">
+        <span>Nutanix K8S相关功能</span><i class="fa fa-angle-right fa-lg category-icon"></i><i class="fa fa-circle-thin read-icon"></i>
+      </a>
+        <ul>
+      <li data-nav-id="/05-k8s/01-k8s-cluster/" class="dd-item">
+        <a href="/05-k8s/01-k8s-cluster/">
+          <span>一键安装K8S群集</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/06-ce/" class="dd-item">
+      <a href="/06-ce/">
+        <span>Nutanix CE安装和使用</span><i class="fa fa-angle-right fa-lg category-icon"></i><i class="fa fa-circle-thin read-icon"></i>
+      </a>
+        <ul>
+      <li data-nav-id="/06-ce/01-install-ce-cluster/" class="dd-item">
+        <a href="/06-ce/01-install-ce-cluster/">
+          <span>环境准备</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/06-ce/02-setup/" class="dd-item">
+        <a href="/06-ce/02-setup/">
+          <span> 安装部署</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/06-ce/03-basic-ops/" class="dd-item">
+        <a href="/06-ce/03-basic-ops/">
+          <span>常用功能操作</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/06-ce/04-tips/" class="dd-item">
+        <a href="/06-ce/04-tips/">
+          <span>常用技巧</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+        </ul>
+    </li>
+
+
+
+        <section id="shortcuts">
+                <li class="" role=""><h3>更多</h3><a href="https://github.com/Nutanix-lab/lab-guide" target="_blank" rel="noopener"><i class='fa fa-github'></i> Github代码库</a></li>
+                <li class="" role=""><a href="/showcase" target="_blank" rel="noopener"><i class='fa fa-camera'></i>友情链接</a></li>
+                <li class="" role=""><a href="http://nutnaix.martinliu.cn/" target="_blank" rel="noopener"><i class='fa fa-bookmark'></i> Nutanix实验室</a></li>
+                <li class="" role=""><a href="/credits" target="_blank" rel="noopener"><i class='fa fa-bullhorn'></i> Credits</a></li>
+        </section>
+            <a id="clear-history" class="" href="#" data-clear-history-toggle=""><i class="fa  fa-history"></i> </a>
+
+    <hr />
+    <li></li>
+    
+    </ul>
+
+ <section id="footer"><center>
+
+<a class="github-button" href="https://github.com/Nutanix-lab/lab-guide/archive/master.zip" data-icon="octicon-cloud-download" aria-label="Download Nutanix Lab docs on GitHub">Download</a>
+
+
+<a class="github-button" href="https://github.com/Nutanix-lab/lab-guide" data-icon="octicon-star" data-show-count="false" aria-label="Star Nutanix Lab Docs on GitHub">Star</a>
+
+
+<a class="github-button" href="https://github.com/Nutanix-lab/lab-guide/fork" data-icon="octicon-repo-forked" data-show-count="true" aria-label="Fork Nutanix Lab Docs on GitHub">Fork</a>
+
+
+</center>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+    </section>
+  </div>
+</nav>
+
+
+
+<section id="body">
+<div id="overlay"></div>
+<div class="padding highlightable">
+
+  <div id="top-bar">
+    
+      
+      
+      
+    <div id="top-github-link">
+      <a class="github-link" href="https://github.com/Nutanix-lab/lab-guide/edit/master/content03-NuCalm-middle/04-lamp-bp.md" target="blank">
+        <i class="fa fa-code-fork"></i>
+        
+      </a>
+    </div><div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+        <span id="sidebar-toggle-span">
+          <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+            <i class="fa fa-bars"></i>
+          </a>
+        </span>
+        <span id="toc-menu"><i class="fa fa-list-alt"></i></span>
+        <span class="links">
+        
+
+
+
+
+
+
+
+ <a href='/'>Nutanix实验室</a> > <a href='/03-nucalm-middle/'>Nutanix Calm中级功能</a> > LAMP技术堆栈蓝图
+
+ 
+
+ 
+
+   
+        </span>
+    </div>
+    
+    
+    <div class="progress">
+        <div class="wrapper">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#蓝图中的重点配置">蓝图中的重点配置</a>
+<ul>
+<li><a href="#蓝图的代码">蓝图的代码</a>
+<ul>
+<li><a href="#数据库">数据库</a></li>
+<li><a href="#应用服务器">应用服务器</a></li>
+<li><a href="#负载均衡">负载均衡</a></li>
+</ul></li>
+<li><a href="#测试和验证">测试和验证</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+        </div>
+    </div>
+    
+
+  </div>
+
+
+<div id="body-inner">
+  
+    <h1>LAMP技术堆栈蓝图</h1>
+  
+
+
+
+    
+    
+    
+    
+
+<p>这个lab的目标：</p>
+
+<ol>
+<li>蓝图使用上面的CentOS7的模板镜像</li>
+<li>创建数据库、app、LB服务</li>
+<li>设置服务的各种安装包</li>
+<li>设置用于应用部署的变量参数</li>
+</ol>
+
+<div class="alert 
+alert-info"
+ 
+role="alert"><strong>参考蓝图</strong> 可以在GitHub下载本文示例蓝图文件，网址：<a href="https://github.com/Nutanix-lab/calm">https://github.com/Nutanix-lab/calm</a>，蓝图文件名：LAMP_colo.json。</div>
+
+
+<p>下面是这个蓝图的关键配置讲解。</p>
+
+<p>下载上传本蓝图的步骤省略，参考本章前两篇文章。</p>
+
+<h2 id="蓝图中的重点配置">蓝图中的重点配置</h2>
+
+<p><img src="/images/3101516620310_.pic_hd.jpg" alt="3101516620310_.pic_hd" /></p>
+
+<p>设置量变量参数，用于参数化这个LAMP模板
+* 配置MySQL数据库密码
+* 变量 DEMO_COMP 用于初始化 Apache的默认首页的内容，扩展开去，你也可以设置为在Apache/Php服务器上部署的应用的代码的参数，如：下载网址等，这样就可以让这个蓝图自动化的部署目标运行的应用代码。</p>
+
+<p><img src="/images/3111516620357_.pic_hd.jpg" alt="3111516620357_.pic_hd" /></p>
+
+<ul>
+<li>数据库服务器的基础模板选择 martin-centos-t1 这里设定的是不可变</li>
+<li>其它的虚拟机规格参数配置如EC2 Demo蓝图，参考上文。</li>
+</ul>
+
+<p><img src="/images/3121516620399_.pic_hd.jpg" alt="3121516620399_.pic_hd" /></p>
+
+<ul>
+<li>这段脚本是数据库服务的数据安装命令</li>
+<li>使用了应用级别的变量初始化MySQL数据库root口令</li>
+</ul>
+
+<p><img src="/images/3131516620437_.pic_hd.jpg" alt="3131516620437_.pic_hd" /></p>
+
+<ul>
+<li>这段脚本是Apache服务的安装命令</li>
+<li>使用了应用级别的变量初始化网站首页的内容，本例中及用于演示的目的</li>
+<li>真实场景中，可以是一段动态的拉取应用代码吧的脚本，参数可以是应用的名称、版本和位置等。</li>
+</ul>
+
+<p><img src="/images/3141516620459_.pic_hd.jpg" alt="3141516620459_.pic_hd" /></p>
+
+<ul>
+<li>Apache服务器在LB负载均衡器的后面，默认两个副本</li>
+<li>副本数在部署的时候可选</li>
+</ul>
+
+<h3 id="蓝图的代码">蓝图的代码</h3>
+
+<h4 id="数据库">数据库</h4>
+
+<pre><code>#!/bin/bash
+set -ex
+
+# -*- Mysql installation 
+#sudo yum install -y &quot;http://repo.mysql.com/mysql-community-release-el7.rpm&quot;
+sudo yum update -y
+sudo yum install -y mariadb-server mariadb
+sudo systemctl start mariadb
+sudo systemctl enable mariadb
+
+# -*- Mysql secure installation
+mysql -u root&lt;&lt;-EOF
+UPDATE mysql.user SET Password=PASSWORD('@@{MYSQL_PASSWORD}@@') WHERE User='root';
+DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
+DELETE FROM mysql.user WHERE User='';
+DELETE FROM mysql.db WHERE Db='test' OR Db='test\_%';
+FLUSH PRIVILEGES;
+EOF
+</code></pre>
+
+<h4 id="应用服务器">应用服务器</h4>
+
+<pre><code>#!/bin/bash
+set -ex
+
+# -*- Install httpd and php
+sudo yum update -y
+sudo yum install -y httpd php php-mysql
+
+echo &quot;&lt;IfModule mod_dir.c&gt;
+        DirectoryIndex index.php index.html index.cgi index.pl index.php index.xhtml index.htm
+&lt;/IfModule&gt;&quot; | sudo tee /etc/httpd/conf.modules.d/dir.conf
+
+echo &quot;&lt;?php
+phpinfo();
+?&gt;&quot; | sudo tee /var/www/html/info.php 
+
+echo &quot;&lt;h1&gt; @@{DEMO_COMP}@@ &lt;/h1&gt;  &lt;?php echo gethostname(); ?&gt;&quot; | sudo tee /var/www/html/index.html
+
+sudo systemctl restart httpd
+sudo systemctl enable httpd
+</code></pre>
+
+<h4 id="负载均衡">负载均衡</h4>
+
+<pre><code>#!/bin/bash
+set -ex
+
+
+port=80
+sudo yum update -y
+sudo yum install -y haproxy
+
+echo &quot;global
+  log 127.0.0.1 local0
+  log 127.0.0.1 local1 notice
+  maxconn 4096
+  quiet
+  user haproxy
+  group haproxy
+defaults
+  log     global
+  mode    http
+  retries 3
+  timeout client 50s
+  timeout connect 5s
+  timeout server 50s
+  option dontlognull
+  option httplog
+  option redispatch
+  balance  roundrobin
+# Set up application listeners here.
+listen stats 0.0.0.0:8080
+  mode http
+  log global
+  stats enable
+  stats hide-version
+  stats refresh 30s
+  stats show-node
+  stats uri /stats
+listen admin
+  bind 127.0.0.1:22002
+  mode http
+  stats uri /
+frontend http
+  maxconn 2000
+  bind 0.0.0.0:80
+  default_backend servers-http
+backend servers-http&quot; | sudo tee /etc/haproxy/haproxy.cfg
+
+sudo sed -i 's/server host-/#server host-/g' /etc/haproxy/haproxy.cfg
+
+hosts=$(echo &quot;@@{APACHE_PHP.address}@@&quot; | sed 's/^,//' | sed 's/,$//' | tr &quot;,&quot; &quot;\n&quot;)
+
+
+for host in $hosts
+do
+   echo &quot;  server host-${host} ${host}:${port} weight 1 maxconn 100 check&quot; | sudo tee -a /etc/haproxy/haproxy.cfg
+done
+
+sudo systemctl daemon-reload
+sudo systemctl enable haproxy
+sudo systemctl restart haproxy
+
+</code></pre>
+
+<h3 id="测试和验证">测试和验证</h3>
+
+<p>如前文所述Launch这个蓝图，在Service菜单中找到负载均衡HAPROXY服务，点击该服务，找到它的IP地址。</p>
+
+<p><img src="/images/3151516621097_.pic_hd.jpg" alt="3151516621097_.pic_hd" /></p>
+
+<p>在Chrome浏览器里转到这个ip地址的访问。</p>
+
+<p><img src="/images/3161516621227_.pic.jpg" alt="3161516621227_.pi" /></p>
+
+<ul>
+<li>这个页面显示的是启动应用是设置的变量 DEMO_COMP</li>
+</ul>
+
+<div class="alert 
+alert-warning"
+ 
+role="alert"><strong>以上步骤的验收标准：</strong> 通负载均衡进入的Apache服务器的默认网页上显示的是启动自定义的字段。</div>
+
+
+
+    
+    
+          <footer class=" footline" >
+	
+</footer>
+  </div>
+</div>
+
+<div id="navigation">
+<a class="nav nav-prev" href="/03-nucalm-middle/03-ec2-demo/" title="模拟AWS EC2蓝图"> <i class="fa fa-chevron-left"></i></a>
+    <a class="nav nav-next" href="/04-nucalm-advance/" title="Nutanix Calm高级功能" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a></div>
+
+</section>
+<div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+  <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+</div>    
+
+<script src="/js/clipboard.min.js"></script>
+<script src="/js/featherlight.min.js"></script>
+<script src="/js/html5shiv-printshiv.min.js"></script>
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="/js/modernizr.custom.71422.js"></script>
+<script src="/js/docdock.js"></script>
+<script src="/theme-original/script.js"></script>
+
+
+    
+
+    
+    
+
+    
+  </body>
+</html>

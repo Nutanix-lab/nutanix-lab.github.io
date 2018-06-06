@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Prism Central on Nutanix实验室</title>
+    <link>/01-prism-central/</link>
+    <description>Recent content in Prism Central on Nutanix实验室</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    
+	<atom:link href="/01-prism-central/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>部署Prism Central</title>
+      <link>/01-prism-central/00-deploy-pc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/01-prism-central/00-deploy-pc/</guid>
+      <description>在AHV群集的管理界面PE里，点击左上角的第一个方格里的链接 “Register or create new”，在弹出的界面里，点击界面下部的上传安装包的选项，选择如下的两个文件，上传的界面如下所示。
+上传的文件为：
+ 5.5-prism_central.tar 5.5-prism_central_metadata.json  上传完毕之后点击安装按钮
+输入PC虚拟机的相关信息，如下图所示：
+注意可以勾选最下面的那个选项，把PC安装配置好之后一次性的把当前所操作的PE也一次性注册到PC中。 点击上图的部署按钮之后，大约需要半个小时的时间完成整个安装配置过程。
+在部署和配置PC的过程中，可以监控以下这两个任务的进度。
+安装部署完毕之后，在PE的界面中就可以看到PC的状态为OK。点击Launch链接。进入PC的登录界面，默认的用户名和密码是 admin / Nutanix/4u
+以上步骤的验收标准： 使用PC的默认用户名和密码成功登陆新安装的PC。 </description>
+    </item>
+    
+    <item>
+      <title>配置Prism Central</title>
+      <link>/01-prism-central/01-configure-pc/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/01-prism-central/01-configure-pc/</guid>
+      <description>用新修改的admin密码登录之后，点击右上角的问号按钮。点击下面的Self Service &amp;amp; Apps链接，进入SSP的初始化配置界面。
+点击界面上的New Directory 按钮，配置和AD的集成。
+在配置页面里输入AD的项目信息，下面的AD的域名为zenlab.local；点击Next按钮。 进入SSP管理员配置页面，点击 Add Admins 按钮。
+在输入框里输入 ssp_a 即可自动搜索出之前创建的SSP管理员组。也可以使用已经由的AD用户和组，点击 Save。
+在网络配置里勾选默认群集中供SSP用户使用的网络。之后点击 Next 。
+在最后一个页面中勾选 Enable App Management ，点击 Finish 完成SSP的配置和App功能的启用。 以上配置的生效需要一个过程，大约需要十分钟左右的时间，可以在任务里观察这个任务的状态。
+以上步骤的验收标准： 上图中Enable App Management的100%成功完成。 </description>
+    </item>
+    
+  </channel>
+</rss>

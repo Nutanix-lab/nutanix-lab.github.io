@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nutanix CE安装和使用 on Nutanix实验室</title>
+    <link>/06-ce/</link>
+    <description>Recent content in Nutanix CE安装和使用 on Nutanix实验室</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    
+	<atom:link href="/06-ce/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>环境准备</title>
+      <link>/06-ce/01-install-ce-cluster/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/06-ce/01-install-ce-cluster/</guid>
+      <description>这个lab的目标：
+ 选择兼容的硬件 准备好社区登录账户  硬件要求 Nutanix CE版本支持两种平台部署方式，一种是部署在物理服务器上，另外一种可以以虚拟机的形式部署。以下是使用Community Edition已经测试的过硬件配置建议。但是，与其他Community Edition用户一样，您可能会发现其他硬件和推荐的类型一样可以兼容，包含，但不仅限于以下硬件平台：
+   组件 推荐配置 说明     CPU Intel CPUs 支持 VT-x 至少配置4核; 2核给 Controller VM 专用   内存 至少16 GB，每个节点的CVM虚拟机，如果开启去重/压缩功能需要额外的内存开消。 如果想要使用AOS的去重和压缩功能，或者创建更多的虚拟机时，强烈建设配置32 GB    网卡 基于Intel的网卡 一些 Community Edition 用户使用Broadcom 网卡也有成功的.   HBA卡 Community Edition支持(AHCI) SATA, 或 LSI 控制器: * IT 模式 (Nutanix测试显示IT模式的性能优于IR模式) * IR 直通模式 * IR RAID-0模式    存储设备 每个节点的SSD/HDD数据最多为4块 有些Community Edition 用户也有超过4个设备的成功案例   冷数据层 不低于500 GB, 最大 18 TB (3 x 6 TB HDDs) 用于冷数据存储的HDD 或 SSD   热数据层 单个不低于200 GB SSD 将SSD(s)放在HDD之前(通常为0或1) 第一个槽位数字取决于制造商的标签。不支持基于NVMe的驱动器   引导分区 每节点一个8 GB 以上的设备.</description>
+    </item>
+    
+    <item>
+      <title> 安装部署</title>
+      <link>/06-ce/02-setup/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/06-ce/02-setup/</guid>
+      <description> 这个lab的目标：
+ 完成安装过程 启动和登录CE的Prism界面  物理环境部署 详细的说明参照官方文档：
+https://portal.nutanix.com/#/page/docs/details?targetId=Nutanix-Community-Edition-Getting-Started:Nutanix-Community-Edition-Getting-Started
+安装步骤如下所示：
+ 使用工具将CE镜像刷到U盘 https://www.osforensics.com/tools/write-usb-images.html 使用U盘启动机器 使用install用户进行配置 使用cluster create命令创建集群 首次访问Prism，必须保持网络连接，必须提前注册my.nutanix.com的账号用于身份验证  使用U盘引导之后的安装开始界面如下：
+使用Install用户登录，不需要输入密码；输入install按回车。
+选择键盘布局，使用Tab键选择“Proceed” 这将消除磁盘上的任何现有数据。
+输入IP地址信息
+Host IP: 10.68.69.101 CVM IP: 10.68.69.102 Netmask: 255.255.255.0 Gateway: 10.68.69.1 Single controller DNS: 8.8.8.8  注意：安装需要连接Internet；只有一个设备时需要在Create single-mode cluster打勾选择
+完成安装之后，按回车，重启服务器。
+虚拟机环境部署 这种在虚拟化环境中部署CE属于实验目的，如果已经完成了以上的硬件服务器部署，请忽略下文，进入下一个章节。
+安装指南:
+ 将CE镜像改为vmdk（如果是ESXi，使用vmkftools；如果是workstation，使用vmx文件） 使用install用户进行配置 使用cluster create命令创建集群 首次访问Prism，必须保持网络连接，必须提前注册my.nutanix.com的账号用于身份验证  以VMWare Workstation部署CE为例:
+解压ce-2017.07.20-stable.img.gz文件，你将得到一个名为“ce-2017.07.20-stable.img”的文件，将此文件改成“ce-flat.vmdk”。根据以下内容再创建名为ce.vmdk的描述文件。
+https://www.virtuallifestyle.nl/wp-content/uploads/2014/09/ce.txt
+新建一个虚拟机 设置虚拟机配置 添加磁盘 这是很关键的一步，对于VM的第一个磁盘，附加一个现有的SATA磁盘。选择上面创建的映像/磁盘描述符文件。 其它磁盘添加 除了第一个安装引导盘以外，再添加两块磁盘，第二块盘作为热数据层，第三块盘作为冷数据层。 启动虚拟机-开始安装 启动后，进行安装界面，安装方式跟之前物理环境中的过程一样。 访问Prism界面 输入CVM的IP地址，使用admin/admin登录Prism，并修改密码 按照提示使用my.nutanix.com的账号激活CE，此步骤需要访问Internet 激活成功后，开启你的HCI之旅吧！Enjoy it! 以上步骤的验收标准： 成功登陆Prism界面。 </description>
+    </item>
+    
+    <item>
+      <title>常用功能操作</title>
+      <link>/06-ce/03-basic-ops/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/06-ce/03-basic-ops/</guid>
+      <description> 这个lab的目标：
+ 常见功能 Prism界面的基本使用  显示配置集群管理地址 点击左上角集群名称，可以显示集群详细信息以及配置集群管理地址： 更新用户信息 用于更新当前用户的联系方式，包括电子邮件地址 更改用户登录口令 REST API浏览器 查询所有Rest API接口 下载nCLI 下载命令行工具包nCLI，用于在windows或者其他支持Java平台的系统上可以通过命令行远程管理集群 解压之后在命令行中运行，即可连接到远程集群，执行管理命令，如：
+查询集群版本： 获取主机列表： 下载并安装windows Cmdlets工具包 下载Windows Cmdlets工具包，可以提供Windows管理员用熟悉的Powershell进行集群管理 技术支持中心网站 当需要寻求技术支持时，可以直接从Prism界面中打开技术支持中心网站，并登陆即可 打开文档中心网站 点击帮助时，可以打开在线的文档页面，查找所有Nutanix最新文档资料 集群健康检查功能演示 点击Health Tutorial即可通过动画方式详细了解Nutanix Health Check功能如何使用 打开Nutanix社区网站 点击Nutanix Next Community可以打开Nutanix社区网站寻求社区的协助 添加AD域用户登录验证 添加AD域名和验证的IP地址端口：ldap://10.91.233.78:389，可以使用AD进行用户验证 角色映射 可以将域账号中的角色映射为Nutanix的管理员用户或者普通用户 创建本地用户 可以创建其他管理员用户或者非管理员用户 使用域账号登陆 配置邮件服务器地址 配置邮件服务器地址用于发送告警邮件 配置告警邮件 配置发送告警邮件给管理员或者Nutanix Support 告警策略配置 针对不同告警，可以配置响应的告警策略通知管理员，避免发生告警风暴 网络文件系统白名单 允许特定网段的IP访问Nutanix存储 软件升级 简单的一键升级功能，可以同时支持升级NOS、Hypervisor、NCC和Firmware，并且实现无人值守升级过程。 字符界面也可以查看升级过程 自定义欢迎信息或者免责声明等 输入个性化欢迎信息或者免责声明，当用户打开网页即可看到该信息。 配置Nutanix的DNS服务器地址 输入DNS服务器地址 配置NTP服务器 输入NTP服务器地址 小结  Nutanix的Prism作为统一的管理接口，不仅可以管理服务器、存储等基础架构，并且可以实时监控Nutanix平台上所有虚拟机状态，用户可以通过一个界面完成日常监控、维护、快速故障定位和诊断、在线升级vSphere和NOS、告警管理、用户管理等日常操作 Nutanix更提供命令行接口和预定义Windows Cmdlets脚本，供高级用户开发自动化脚本以实现自动化运维操作 Nutanix提供的REST API接口可以方便的与其他监控系统进行整合，简化运维人员日常运维成本。Nutanix也提供SCOM整合的监控管理工具包，便于用户将与现有Microsoft SCOM监控平台进行对接  </description>
+    </item>
+    
+    <item>
+      <title>常用技巧</title>
+      <link>/06-ce/04-tips/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/06-ce/04-tips/</guid>
+      <description> 这个lab的目标：
+ 在硬件受限制的时候调整cvm的规格 调整时区和时间 其它  调整时区和日期相关 调整Host或者CVM操作系统的时区、日期和时间等。
+参考命令如下：
+timedatectl set-timezone Asia/Shanghai timedatectl set-ntp true ntpq -p  调整CVM的内存 如果按照CE的机器内存很紧张，可以将CVM的内存降低，登陆到AHV的OS，参考命令如下：
+virsh shutdown NTNX-7aa2dd30-A-CVM virsh setmaxmem NTNX-7aa2dd30-A-CVM 10G --config virsh setmem NTNX-7aa2dd30-A-CVM 10G --config virsh start NTNX-7aa2dd30-A-CVM virsh dominfo NTNX-7aa2dd30-A-CVM  </description>
+    </item>
+    
+  </channel>
+</rss>

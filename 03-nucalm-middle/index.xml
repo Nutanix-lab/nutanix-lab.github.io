@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nutanix Calm中级功能 on Nutanix实验室</title>
+    <link>/03-nucalm-middle/</link>
+    <description>Recent content in Nutanix Calm中级功能 on Nutanix实验室</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    
+	<atom:link href="/03-nucalm-middle/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>HelloWorld蓝图</title>
+      <link>/03-nucalm-middle/01-helloworld/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/03-nucalm-middle/01-helloworld/</guid>
+      <description>这个lab的目标：
+ 蓝图使用上面的CentOS7的模板镜像 在创建工作流里生成一个包含Hello World字符串的文件/helloworld.txt 这个蓝图可以生成自定义配置的n台虚拟机 运行这个蓝图生成3个虚拟机 使用Stop工作流，poweroff这三个虚拟机 使用Start工作流，poweron这三个虚拟机 使用Delete工作流删除这三个虚拟机实例  操作步骤如下。
+点击左侧的第二个蓝图按钮，点击 创建应用蓝图 按钮。 选择这个蓝图部署的项目名称，点击处理按钮。 点击配置按钮，填写应用配置信息。 填写蓝图名称和描述。 点击Credentials按钮，输入一个root用户信息，用于登录自动化生成的虚拟机，例如 root / nutanix/4u , 输入完密码后再空白处点击一下，在点击密码框中右侧的眼睛按钮，确认保存的密码。点击 back按钮。 点击 Save 按钮保存当前的配置，其实也是检查当前配置信息的正确性，否则保存不会成功。 点击右下角的Create按钮，配置创建工作流，输入如图所示的信息。选择的 Image 模板名称是上个步骤里生成的模板。
+选择该蓝图的这个服务VM的配置信息，包括用于ssh登录的账户信息。 点击 save 按钮保存蓝图配置，点击Launch按钮，部署这个蓝图。 输入此次应用部署的名称，点击 create 按钮。 观察当前这个蓝图部署的状态。 点击 Manager ，点击 Create 创建工作流右侧的眼睛按钮，查看当前自动化工作流执行的进度和状态。 全部都是绿色表示一切正常。 在PC的虚拟机查看控制台刚才的部署生成的vm和它的状态。 SSH登录到这个虚拟机，运行下面的命令查看目标的文件是否部署成功。
+[root@localhost ~]# ls / bin etc lib mnt root srv usr boot helloworld.txt lib64 opt run sys var dev home media proc sbin tmp [root@localhost ~]# cat /helloworld.</description>
+    </item>
+    
+    <item>
+      <title>三层LAMP应用蓝图</title>
+      <link>/03-nucalm-middle/02-3layer/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/03-nucalm-middle/02-3layer/</guid>
+      <description>本Lab的目标： * 使用一个下载的别人开发的蓝图 * 导入在自己的项目中 * 在本地项目的蓝图编辑器里修改成一个可以正常运行的蓝图 * 使用当前项目的配额测试和部署这个蓝图的应用 * 使用和测试蓝图中所定义的自动化运维流程 * 修改和增加自定义的应用服务自动化维护场景（可选）
+蓝图的下载地址：http://lab.digitalformula.net/calm-lab-3.0/blueprints/2017.12.06.LAMP.RC6.json.zip
+下载后解压缩得到蓝图的 json 文件。
+在App页面中点击左侧的第二个按钮，进入蓝图管理，点击 Upload Blueprint 按钮，通过上传的方式新建一个蓝图。点击后选择刚才下载的json蓝图文件。
+输入这个蓝图在本地的名称和部署的项目。点击 上传 按钮。 上传之后进入该蓝图的编辑模式，可以点击图中的红色感叹号，了解当前蓝图里必须修改的配置点。然后逐一检查和确认每一项配置，保证所有配置和当前的项目和资源池匹配。
+点击 Credentials 按钮，将密码更新为上述步骤中创建的模板机的root口令， Credentials name最好保持不变。点击空白处和密码查看的眼睛图标，确认密码应保存住了，点击 back 按钮。
+依次点击左下角Service清单中的三项服务，修改每项服务中的详细配置，如下图所示。 确保使用正确的登录密码信息。 点击保存按钮，确认整个蓝图的配置信息都是正确的，点击 Lunch 按钮部署这个蓝图。 输入这次蓝图部署的名称，点击Create按钮，创建这个部署。 在应用部署界面中观察 Create 工作流的执行状态。 在虚拟机控制台里观察虚拟机创建的状态和结果。 部署完毕之后可以范围 负载均衡 服务状态查看地址： http://10.21.11.55:8080/stats
+如果右下方的两个服务的状态都是UP的话，这表明整套服务部署成功了。然后访问 http://haproxy_vm_ip/ 浏览应用服务页面。
+以上步骤的验收标准： 可以登录用户蓝图生成的vm，能看到三层应用的Web界面。 </description>
+    </item>
+    
+    <item>
+      <title>模拟AWS EC2蓝图</title>
+      <link>/03-nucalm-middle/03-ec2-demo/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/03-nucalm-middle/03-ec2-demo/</guid>
+      <description>这个lab的目标：
+ 蓝图使用上面的CentOS7的模板镜像 创建模仿AWS EC2虚拟机服务的蓝图 建立两种规格的虚拟机 可以设置虚拟机的其它各种参数  参考蓝图 可以在GitHub下载本文示例蓝图文件，网址：https://github.com/Nutanix-lab/calm。 下面是这个蓝图的关键配置讲解。
+应用基础配置 - Application Profile 在变量清单这里增加一个vm_hostname变量，设置初始值为vmhostname
+EC2服务配置 - 规格参数  配置VM Name，设置两个变量组成的虚拟机名称，用于在Prism里查询 配置 martin-centos-t1 为初始化的默认镜像，点亮右侧的小人，这样就可以使蓝图的使用者在运行这个蓝图的时候，选择这个参数的值，而不是预想定死的   添加一块数据盘，初始8GB，用户可变更 配置默认网络为vlan128，用户可变更（右侧小蓝人已经被点亮）  EC2服务配置 - 软件包安装  基于martin-centos-t1模板的预装软件包，如果有其它扩展安装和配置的可以把命令写在这里 这里使用了一个修改虚拟机主机名的操作  EC2服务配置 - 虚拟机副本数量  默认配置为1，用户运行时可变  测试EC2蓝图 在蓝图编辑器里点击右上角的Launch按钮。
+ 配置这次部署的应用名称 修改vm_hostname的名称为 xyz-bank 点击VM Configuration下面的EC2，在里面可以看到所有运行时可以变更的参数，找到参数：number of replicas ；修改默认的1位3； 点击右下角的 Create 按钮  观察测试结果 进入Application，点击右侧第三个图标；点击Manager，点击Create的右侧的眼睛的按钮。查看整个部署的过程。点击 Services Tab；观察已经创建的三个虚拟机的IP地址。
+进入Explore-&amp;gt; VM 在搜索栏输入 xyz 按回车，应该能看到以下三个虚拟机；
+点击其中的一个vm
+点击这个vm上面的console</description>
+    </item>
+    
+    <item>
+      <title>LAMP技术堆栈蓝图</title>
+      <link>/03-nucalm-middle/04-lamp-bp/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/03-nucalm-middle/04-lamp-bp/</guid>
+      <description>这个lab的目标：
+ 蓝图使用上面的CentOS7的模板镜像 创建数据库、app、LB服务 设置服务的各种安装包 设置用于应用部署的变量参数  参考蓝图 可以在GitHub下载本文示例蓝图文件，网址：https://github.com/Nutanix-lab/calm，蓝图文件名：LAMP_colo.json。 下面是这个蓝图的关键配置讲解。
+下载上传本蓝图的步骤省略，参考本章前两篇文章。
+蓝图中的重点配置 设置量变量参数，用于参数化这个LAMP模板 * 配置MySQL数据库密码 * 变量 DEMO_COMP 用于初始化 Apache的默认首页的内容，扩展开去，你也可以设置为在Apache/Php服务器上部署的应用的代码的参数，如：下载网址等，这样就可以让这个蓝图自动化的部署目标运行的应用代码。
+ 数据库服务器的基础模板选择 martin-centos-t1 这里设定的是不可变 其它的虚拟机规格参数配置如EC2 Demo蓝图，参考上文。   这段脚本是数据库服务的数据安装命令 使用了应用级别的变量初始化MySQL数据库root口令   这段脚本是Apache服务的安装命令 使用了应用级别的变量初始化网站首页的内容，本例中及用于演示的目的 真实场景中，可以是一段动态的拉取应用代码吧的脚本，参数可以是应用的名称、版本和位置等。   Apache服务器在LB负载均衡器的后面，默认两个副本 副本数在部署的时候可选  蓝图的代码 数据库 #!/bin/bash set -ex # -*- Mysql installation #sudo yum install -y &amp;quot;http://repo.mysql.com/mysql-community-release-el7.rpm&amp;quot; sudo yum update -y sudo yum install -y mariadb-server mariadb sudo systemctl start mariadb sudo systemctl enable mariadb # -*- Mysql secure installation mysql -u root&amp;lt;&amp;lt;-EOF UPDATE mysql.</description>
+    </item>
+    
+  </channel>
+</rss>

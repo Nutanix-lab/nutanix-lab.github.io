@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>/03-nucalm-middle/01-helloworld/</loc>
+  </url>
+  
+  <url>
+    <loc>/04-nucalm-advance/01-docker-swarm-cluster/</loc>
+  </url>
+  
+  <url>
+    <loc>/05-k8s/01-k8s-cluster/</loc>
+  </url>
+  
+  <url>
+    <loc>/02-nucalm-basic/01-configure-calm/</loc>
+  </url>
+  
+  <url>
+    <loc>/00-getting-start/</loc>
+  </url>
+  
+  <url>
+    <loc>/00-getting-start/installation/</loc>
+  </url>
+  
+  <url>
+    <loc>/06-ce/01-install-ce-cluster/</loc>
+  </url>
+  
+  <url>
+    <loc>/06-ce/02-setup/</loc>
+  </url>
+  
+  <url>
+    <loc>/04-nucalm-advance/02-owncloud-dvp/</loc>
+  </url>
+  
+  <url>
+    <loc>/03-nucalm-middle/02-3layer/</loc>
+  </url>
+  
+  <url>
+    <loc>/02-nucalm-basic/02-deploy-bp/</loc>
+  </url>
+  
+  <url>
+    <loc>/00-getting-start/configuration/</loc>
+  </url>
+  
+  <url>
+    <loc>/06-ce/03-basic-ops/</loc>
+  </url>
+  
+  <url>
+    <loc>/03-nucalm-middle/03-ec2-demo/</loc>
+  </url>
+  
+  <url>
+    <loc>/02-nucalm-basic/03-config-cat/</loc>
+  </url>
+  
+  <url>
+    <loc>/03-nucalm-middle/04-lamp-bp/</loc>
+  </url>
+  
+  <url>
+    <loc>/02-nucalm-basic/04-create-template/</loc>
+  </url>
+  
+  <url>
+    <loc>/01-prism-central/</loc>
+  </url>
+  
+  <url>
+    <loc>/06-ce/04-tips/</loc>
+  </url>
+  
+  <url>
+    <loc>/02-nucalm-basic/</loc>
+  </url>
+  
+  <url>
+    <loc>/03-nucalm-middle/</loc>
+  </url>
+  
+  <url>
+    <loc>/04-nucalm-advance/</loc>
+  </url>
+  
+  <url>
+    <loc>/05-k8s/</loc>
+  </url>
+  
+  <url>
+    <loc>/06-ce/</loc>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2017-04-24T18:36:24+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/_footer/</loc>
+    <lastmod>2017-04-24T18:36:24+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/_header/</loc>
+    <lastmod>2017-04-24T18:36:24+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/credits/</loc>
+  </url>
+  
+  <url>
+    <loc>/showcase/</loc>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/01-prism-central/00-deploy-pc/</loc>
+  </url>
+  
+  <url>
+    <loc>/01-prism-central/01-configure-pc/</loc>
+  </url>
+  
+</urlset>

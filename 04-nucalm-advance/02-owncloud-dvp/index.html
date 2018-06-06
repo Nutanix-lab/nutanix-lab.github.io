@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Nutanix实验室</title>
+    
+      <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="generator" content="Hugo 0.41" />
+
+<title>Docker Datacenter使用DVP持久存储 :: Nutanix实验室</title>
+<link rel="shortcut icon" href="/images/favicon.png" type="image/x-icon" />
+<link href="/css/nucleus.css" rel="stylesheet">
+<link href="/css/font-awesome.min.css" rel="stylesheet">
+<link href="/css/hybrid.css" rel="stylesheet">
+<link href="/css/featherlight.min.css" rel="stylesheet">
+<link href="/css/auto-complete.css" rel="stylesheet">
+<link href="/theme-original/style.css" rel="stylesheet">
+
+  <link href="/theme-original/variant-green.css" rel="stylesheet">
+
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+<script src="/js/jquery-2.x.min.js"></script>
+<style type="text/css">
+  :root #header + #content > #left > #rlblock_left {
+    display:none !important;
+  }
+</style>
+<script>
+  var _hmt = _hmt || [];
+  (function () {
+    var hm = document.createElement("script");
+    hm.src = "https://hm.baidu.com/hm.js?50c3a9ae6c51222b31df5510bbca479f";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+  })();
+</script>
+    
+  </head>
+  <body data-url="/04-nucalm-advance/02-owncloud-dvp/">
+    
+      <div id="headermain"></div>
+<nav id="sidebar" class="showVisitedLinks">
+
+
+
+<div class="highlightable">
+  <div id="header-wrapper">
+    <div id="header">
+      
+	
+  
+    <p><img src="/nutanix.jpg" alt="Nutanix Calm" /></p>
+
+  
+
+    </div>
+        <div class="searchbox">
+		    <label for="search-by"><i class="fa fa-search"></i></label>
+		    <input data-search-input id="search-by" type="text" placeholder="">
+		    <span data-search-clear=""><i class="fa fa-close"></i></span>
+		</div>
+		<script type="text/javascript" src="/js/lunr.min.js"></script>
+		<script type="text/javascript" src="/js/auto-complete.js"></script>
+		<script type="text/javascript">
+        
+            var baseurl = "\/";
+        
+		</script>
+		<script type="text/javascript" src="/js/search.js"></script>
+  </div>
+
+      <ul class="topics">
+            <li data-nav-id="/" class="dd-item">
+            <a href="/"><i class="fa fa-fw fa-home"></i></a>
+            </li>
+    <li data-nav-id="/00-getting-start/" class="dd-item">
+      <a href="/00-getting-start/">
+        <span>基本配置</span><i class="fa fa-angle-right fa-lg category-icon"></i><i class="fa fa-circle-thin read-icon"></i>
+      </a>
+        <ul>
+      <li data-nav-id="/00-getting-start/installation/" class="dd-item">
+        <a href="/00-getting-start/installation/">
+          <span>安装AHV群集</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/00-getting-start/configuration/" class="dd-item">
+        <a href="/00-getting-start/configuration/">
+          <span>配置和部署AD</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/01-prism-central/" class="dd-item">
+      <a href="/01-prism-central/">
+        <span>Prism Central</span><i class="fa fa-angle-right fa-lg category-icon"></i><i class="fa fa-circle-thin read-icon"></i>
+      </a>
+        <ul>
+      <li data-nav-id="/01-prism-central/00-deploy-pc/" class="dd-item">
+        <a href="/01-prism-central/00-deploy-pc/">
+          <span>部署Prism Central</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/01-prism-central/01-configure-pc/" class="dd-item">
+        <a href="/01-prism-central/01-configure-pc/">
+          <span>配置Prism Central</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/02-nucalm-basic/" class="dd-item">
+      <a href="/02-nucalm-basic/">
+        <span>Nutanix Calm基础功能</span><i class="fa fa-angle-right fa-lg category-icon"></i><i class="fa fa-circle-thin read-icon"></i>
+      </a>
+        <ul>
+      <li data-nav-id="/02-nucalm-basic/01-configure-calm/" class="dd-item">
+        <a href="/02-nucalm-basic/01-configure-calm/">
+          <span>初始化配置Calm</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/02-nucalm-basic/02-deploy-bp/" class="dd-item">
+        <a href="/02-nucalm-basic/02-deploy-bp/">
+          <span>导入Nutanix Calm商店里的蓝图</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/02-nucalm-basic/03-config-cat/" class="dd-item">
+        <a href="/02-nucalm-basic/03-config-cat/">
+          <span>配置服务目录</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/02-nucalm-basic/04-create-template/" class="dd-item">
+        <a href="/02-nucalm-basic/04-create-template/">
+          <span>创建虚拟机模板</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/03-nucalm-middle/" class="dd-item">
+      <a href="/03-nucalm-middle/">
+        <span>Nutanix Calm中级功能</span><i class="fa fa-angle-right fa-lg category-icon"></i><i class="fa fa-circle-thin read-icon"></i>
+      </a>
+        <ul>
+      <li data-nav-id="/03-nucalm-middle/01-helloworld/" class="dd-item">
+        <a href="/03-nucalm-middle/01-helloworld/">
+          <span>HelloWorld蓝图</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/03-nucalm-middle/02-3layer/" class="dd-item">
+        <a href="/03-nucalm-middle/02-3layer/">
+          <span>三层LAMP应用蓝图</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/03-nucalm-middle/03-ec2-demo/" class="dd-item">
+        <a href="/03-nucalm-middle/03-ec2-demo/">
+          <span>模拟AWS EC2蓝图</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/03-nucalm-middle/04-lamp-bp/" class="dd-item">
+        <a href="/03-nucalm-middle/04-lamp-bp/">
+          <span>LAMP技术堆栈蓝图</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/04-nucalm-advance/" class="dd-item parent">
+      <a href="/04-nucalm-advance/">
+        <span>Nutanix Calm高级功能</span>
+            <i class="fa fa-angle-down fa-lg category-icon"></i><i class="fa fa-circle-thin read-icon"></i>
+      </a>
+        <ul>
+      <li data-nav-id="/04-nucalm-advance/01-docker-swarm-cluster/" class="dd-item">
+        <a href="/04-nucalm-advance/01-docker-swarm-cluster/">
+          <span>一键安装Docker Swarm群集</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/04-nucalm-advance/02-owncloud-dvp/" class="dd-item active">
+        <a href="/04-nucalm-advance/02-owncloud-dvp/">
+          <span>Docker Datacenter使用DVP持久存储</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/05-k8s/" class="dd-item">
+      <a href="/05-k8s/">
+        <span>Nutanix K8S相关功能</span><i class="fa fa-angle-right fa-lg category-icon"></i><i class="fa fa-circle-thin read-icon"></i>
+      </a>
+        <ul>
+      <li data-nav-id="/05-k8s/01-k8s-cluster/" class="dd-item">
+        <a href="/05-k8s/01-k8s-cluster/">
+          <span>一键安装K8S群集</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+        </ul>
+    </li>
+    <li data-nav-id="/06-ce/" class="dd-item">
+      <a href="/06-ce/">
+        <span>Nutanix CE安装和使用</span><i class="fa fa-angle-right fa-lg category-icon"></i><i class="fa fa-circle-thin read-icon"></i>
+      </a>
+        <ul>
+      <li data-nav-id="/06-ce/01-install-ce-cluster/" class="dd-item">
+        <a href="/06-ce/01-install-ce-cluster/">
+          <span>环境准备</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/06-ce/02-setup/" class="dd-item">
+        <a href="/06-ce/02-setup/">
+          <span> 安装部署</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/06-ce/03-basic-ops/" class="dd-item">
+        <a href="/06-ce/03-basic-ops/">
+          <span>常用功能操作</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+      <li data-nav-id="/06-ce/04-tips/" class="dd-item">
+        <a href="/06-ce/04-tips/">
+          <span>常用技巧</span><i class="fa fa-circle-thin read-icon"></i>
+        </a>
+    </li>
+        </ul>
+    </li>
+
+
+
+        <section id="shortcuts">
+                <li class="" role=""><h3>更多</h3><a href="https://github.com/Nutanix-lab/lab-guide" target="_blank" rel="noopener"><i class='fa fa-github'></i> Github代码库</a></li>
+                <li class="" role=""><a href="/showcase" target="_blank" rel="noopener"><i class='fa fa-camera'></i>友情链接</a></li>
+                <li class="" role=""><a href="http://nutnaix.martinliu.cn/" target="_blank" rel="noopener"><i class='fa fa-bookmark'></i> Nutanix实验室</a></li>
+                <li class="" role=""><a href="/credits" target="_blank" rel="noopener"><i class='fa fa-bullhorn'></i> Credits</a></li>
+        </section>
+            <a id="clear-history" class="" href="#" data-clear-history-toggle=""><i class="fa  fa-history"></i> </a>
+
+    <hr />
+    <li></li>
+    
+    </ul>
+
+ <section id="footer"><center>
+
+<a class="github-button" href="https://github.com/Nutanix-lab/lab-guide/archive/master.zip" data-icon="octicon-cloud-download" aria-label="Download Nutanix Lab docs on GitHub">Download</a>
+
+
+<a class="github-button" href="https://github.com/Nutanix-lab/lab-guide" data-icon="octicon-star" data-show-count="false" aria-label="Star Nutanix Lab Docs on GitHub">Star</a>
+
+
+<a class="github-button" href="https://github.com/Nutanix-lab/lab-guide/fork" data-icon="octicon-repo-forked" data-show-count="true" aria-label="Fork Nutanix Lab Docs on GitHub">Fork</a>
+
+
+</center>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+    </section>
+  </div>
+</nav>
+
+
+
+<section id="body">
+<div id="overlay"></div>
+<div class="padding highlightable">
+
+  <div id="top-bar">
+    
+      
+      
+      
+    <div id="top-github-link">
+      <a class="github-link" href="https://github.com/Nutanix-lab/lab-guide/edit/master/content04-NuCalm-advance/02-owncloud-dvp.md" target="blank">
+        <i class="fa fa-code-fork"></i>
+        
+      </a>
+    </div><div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+        <span id="sidebar-toggle-span">
+          <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+            <i class="fa fa-bars"></i>
+          </a>
+        </span>
+        <span id="toc-menu"><i class="fa fa-list-alt"></i></span>
+        <span class="links">
+        
+
+
+
+
+
+
+
+ <a href='/'>Nutanix实验室</a> > <a href='/04-nucalm-advance/'>Nutanix Calm高级功能</a> > Docker Datacenter使用DVP持久存储
+
+ 
+
+ 
+
+   
+        </span>
+    </div>
+    
+    
+    <div class="progress">
+        <div class="wrapper">
+    <nav id="TableOfContents">
+<ul>
+<li>
+<ul>
+<li><a href="#docker服务的安装和配置">Docker服务的安装和配置</a></li>
+<li><a href="#nutanix-dvp-docker-volume-plug-in-安装和配置">Nutanix DVP (Docker Volume Plug-in)安装和配置</a></li>
+<li><a href="#安装docker-for-datercenter">安装Docker For DaterCenter</a>
+<ul>
+<li><a href="#安装ucp-docker-universal-control-plane-节点">安装UCP（Docker Universal Control Plane）节点</a></li>
+<li><a href="#加3个节点到群集里">加3个节点到群集里</a></li>
+<li><a href="#安装dtr-docker镜像仓库">安装DTR-Docker镜像仓库</a></li>
+</ul></li>
+<li><a href="#在docker-datacenter群集中使用dvp">在Docker Datacenter群集中使用DVP</a></li>
+<li><a href="#部署owncloud网盘服务">部署OwnCloud网盘服务</a></li>
+<li><a href="#总结">总结</a></li>
+</ul></li>
+</ul>
+</nav>
+        </div>
+    </div>
+    
+
+  </div>
+
+
+<div id="body-inner">
+  
+    <h1>Docker Datacenter使用DVP持久存储</h1>
+  
+
+
+
+    
+    
+    
+    
+
+<p>Docker宣布Docker Datacenter（简称DDC）正式发布，这套可集成的端到端平台设计用于高效地将应用程序开发和管理工作由内部数据中心迁移至云环境下。</p>
+
+<p>在Docker Datacenter的帮助下，企业将能够立足于内部或者虚拟私有云环境实现容器即服务（简称CaaS）的部署工作。CaaS能够提供一整套IT管理及安全应用的内容与基础设施环境，开发人员则以此为基础通过自助服务模式实现应用程序的构建与部署。</p>
+
+<p>Docker Datacenter当中包含一系列领先的Docker开源项目、商用软件并同大量经过验证并受到支持配置相集成：</p>
+
+<ul>
+<li>Universal Control Plane (UCP) 1.0，嵌入Swarm以实现对Docker环境的管理与编排能力。</li>
+<li>Trusted Registry (DTR) 1.4.3，用于实现Docker镜像管理、安全保护与协作。</li>
+<li>Docker Engine 1.10对强大的container runtime提供商业支持。</li>
+</ul>
+
+<p>本文介绍如何用Docker卷插件的方式，给Docker DDC的Swarm的群集挂载Nutanix存储。<a href="https://store.docker.com/plugins/nutanix-dvp-docker-volume-plug-in">Nutanix Container Volume Plug-in </a>简称DVP，可以给容器提供数据持久化的功能。</p>
+
+<p>本文使用ownCloud网盘应用做功能测试。测试的过程如下，安装部署Docker Datacenter，配置好群集，在UCP的界面里调用DVP插件建持久的数据卷，建立ownCloud服务，部署和测试该服务。</p>
+
+<p>这个lab的目标：</p>
+
+<ol>
+<li>在CentOS7的模板镜像虚拟机里安装配置Nutanix DVP</li>
+<li>部署和配置DDC，包括UCP，DTR和worker节点</li>
+<li>在UCP里配置DVP持久存储</li>
+<li>在DTR里上传OwnCloud镜像</li>
+<li>在DDC的Docker Swarm集群里部署OwnCloud</li>
+<li>测试OwnCloud的功能</li>
+<li>对OwnCloud的容器做摧毁性测试，验证数据的持久性</li>
+</ol>
+
+<h2 id="docker服务的安装和配置">Docker服务的安装和配置</h2>
+
+<p>这一部分描述DVP的安装部署过程，需要连接互联网；安装调试完毕之后，将虚拟机的制作成新的镜像模板待用。这样就能是DDC里的所有节点不重复配置DVP。</p>
+
+<p>先在模板虚拟机里安装Docker服务，<a href="https://docs.docker.com/install/linux/docker-ce/centos/">Docker服务的安装方法见Docker的官方文档。</a></p>
+
+<p>Docker安装的参考命令如下：</p>
+
+<pre><code>$ sudo yum install -y yum-utils \
+  device-mapper-persistent-data \
+  lvm2
+
+$ sudo yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo
+  
+$ sudo yum install docker-ce
+
+$ sudo systemctl start docker
+
+$ sudo systemctl enable docker
+
+</code></pre>
+
+<p>本文使用的是Docker社区文档稳定版 17.03.1-ce ；本文使用的OS是CentOS 7.3。所Docker安装的版本如下：</p>
+
+<pre><code>[root@centos7-temp]# docker version
+Client:
+ Version:      17.03.1-ce
+ API version:  1.27
+ Go version:   go1.7.5
+ Git commit:   c6d412e
+ Built:        Mon Mar 27 17:05:44 2017
+ OS/Arch:      linux/amd64
+
+Server:
+ Version:      17.03.1-ce
+ API version:  1.27 (minimum version 1.12)
+ Go version:   go1.7.5
+ Git commit:   c6d412e
+ Built:        Mon Mar 27 17:05:44 2017
+ OS/Arch:      linux/amd64
+ Experimental: false
+ 
+[root@centos7-temp]# rpm -qa|grep docker
+docker-ce-17.03.1.ce-1.el7.centos.x86_64
+docker-ce-selinux-17.03.1.ce-1.el7.centos.noarch
+
+</code></pre>
+
+<p>本文使用的Docker 安装yum源如下：</p>
+
+<pre><code>[root@centos7-temp]# cat /etc/yum.repos.d/docker-ce.repo
+[docker-ce-stable]
+name=Docker CE Stable - $basearch
+baseurl=https://download.docker.com/linux/centos/7/$basearch/stable
+enabled=1
+gpgcheck=1
+gpgkey=https://download.docker.com/linux/centos/gpg
+
+[docker-ce-stable-debuginfo]
+name=Docker CE Stable - Debuginfo $basearch
+baseurl=https://download.docker.com/linux/centos/7/debug-$basearch/stable
+enabled=0
+gpgcheck=1
+gpgkey=https://download.docker.com/linux/centos/gpg
+
+[docker-ce-stable-source]
+name=Docker CE Stable - Sources
+baseurl=https://download.docker.com/linux/centos/7/source/stable
+enabled=0
+gpgcheck=1
+gpgkey=https://download.docker.com/linux/centos/gpg
+
+[docker-ce-edge]
+name=Docker CE Edge - $basearch
+baseurl=https://download.docker.com/linux/centos/7/$basearch/edge
+enabled=0
+gpgcheck=1
+gpgkey=https://download.docker.com/linux/centos/gpg
+
+[docker-ce-edge-debuginfo]
+name=Docker CE Edge - Debuginfo $basearch
+baseurl=https://download.docker.com/linux/centos/7/debug-$basearch/edge
+enabled=0
+gpgcheck=1
+gpgkey=https://download.docker.com/linux/centos/gpg
+
+[docker-ce-edge-source]
+name=Docker CE Edge - Sources
+baseurl=https://download.docker.com/linux/centos/7/source/edge
+enabled=0
+gpgcheck=1
+gpgkey=https://download.docker.com/linux/centos/gpg
+
+[docker-ce-test]
+name=Docker CE Test - $basearch
+baseurl=https://download.docker.com/linux/centos/7/$basearch/test
+enabled=0
+gpgcheck=1
+gpgkey=https://download.docker.com/linux/centos/gpg
+
+[docker-ce-test-debuginfo]
+name=Docker CE Test - Debuginfo $basearch
+baseurl=https://download.docker.com/linux/centos/7/debug-$basearch/test
+enabled=0
+gpgcheck=1
+gpgkey=https://download.docker.com/linux/centos/gpg
+
+[docker-ce-test-source]
+name=Docker CE Test - Sources
+baseurl=https://download.docker.com/linux/centos/7/source/test
+enabled=0
+gpgcheck=1
+gpgkey=https://download.docker.com/linux/centos/gpg
+</code></pre>
+
+<p>本机所使用的所有安装源如下：</p>
+
+<pre><code>[root@centos7-temp]# yum repolist
+Loaded plugins: fastestmirror
+Loading mirror speeds from cached hostfile
+ * base: mirrors.aliyun.com
+ * epel: mirrors.aliyun.com
+ * extras: mirrors.aliyun.com
+ * updates: mirrors.aliyun.com
+repo id                                   repo name                                                         status
+base/7/x86_64                             CentOS-7 - Base - mirrors.aliyun.com                               9,363
+docker-ce-stable/x86_64                   Docker CE Stable - x86_64                                              4
+epel/x86_64                               Extra Packages for Enterprise Linux 7 - x86_64                    11,808
+extras/7/x86_64                           CentOS-7 - Extras - mirrors.aliyun.com                               381
+updates/7/x86_64                          CentOS-7 - Updates - mirrors.aliyun.com                            1,859
+repolist: 23,415
+</code></pre>
+
+<p>安装docker引擎，并启动服务，并校验服务状态。安装过程参考如下：</p>
+
+<pre><code>[root@centos7-temp]# yum install -y docker-ce
+[root@centos7-temp]# systemctl enable docker
+[root@centos7-temp]# systemctl start docker
+[root@centos7-temp]# systemctl status docker
+● docker.service - Docker Application Container Engine
+   Loaded: loaded (/usr/lib/systemd/system/docker.service; enabled; vendor preset: disabled)
+   Active: active (running) since Tue 2017-06-20 20:30:49 CST; 19min ago
+     Docs: https://docs.docker.com
+ Main PID: 875 (dockerd)
+   CGroup: /system.slice/docker.service
+           ├─ 875 /usr/bin/dockerd
+           ├─ 942 docker-containerd -l unix:///var/run/docker/libcontainerd/docker-containerd.sock --metrics-in...
+           ├─2008 docker-containerd-shim 0ca2346b6126de702fb4dda5f807c0a69a402eb643f15c142730277d0eb7bbcb /var/...
+           └─0ca2346b6126de702fb4dda5f807c0a69a402eb643f15c142730277d0eb7bbcb
+             └─2038 /usr/bin/python /code/main.py --prism-ip 10.68.69.22 --dataservices-ip 10.68.69.23 --prism-...
+</code></pre>
+
+<p>到目前为止，Docker安装配置完成。</p>
+
+<h2 id="nutanix-dvp-docker-volume-plug-in-安装和配置">Nutanix DVP (Docker Volume Plug-in)安装和配置</h2>
+
+<p>下面开始安装DVP，安装和配置过程参考页面。</p>
+
+<p><a href="https://store.docker.com/plugins/nutanix-dvp-docker-volume-plug-in">https://store.docker.com/plugins/nutanix-dvp-docker-volume-plug-in</a></p>
+
+<p>下面是给操作系统安装iscsi initiator服务的参考步骤：</p>
+
+<pre><code>yum install -y iscsi-initiator-utils 
+systemd-tmpfiles --create
+systemctl start iscsid
+systemctl enable iscsid
+systemctl status iscsid
+● iscsid.service - Open-iSCSI
+   Loaded: loaded (/usr/lib/systemd/system/iscsid.service; enabled; vendor preset: disabled)
+   Active: active (running) since Tue 2017-06-20 20:30:46 CST; 24min ago
+     Docs: man:iscsid(8)
+           man:iscsiadm(8)
+ Main PID: 888 (iscsid)
+   CGroup: /system.slice/iscsid.service
+           ├─882 /usr/sbin/iscsid
+           └─888 /usr/sbin/iscsid
+
+Jun 20 20:30:46 centos7-temp.zenlab.local systemd[1]: Starting Open-iSCSI...
+Jun 20 20:30:46 centos7-temp.zenlab.local iscsid[878]: iSCSI logger with pid=882 started!
+Jun 20 20:30:46 centos7-temp.zenlab.local systemd[1]: Failed to read PID from file /var/run/iscsid.pid: Inva...ent
+Jun 20 20:30:46 centos7-temp.zenlab.local systemd[1]: Started Open-iSCSI.
+Jun 20 20:30:47 centos7-temp.zenlab.local iscsid[882]: iSCSI daemon with pid=888 started!
+Hint: Some lines were ellipsized, use -l to show in full.
+</code></pre>
+
+<blockquote>
+<p>解释一下DVP的工作原理是，它是让Docker主机通过iSCSI协议连接Nutanix的存储服务。DVP插件的配置里包含了连接存储服务和存储容器（这个容器是Nutanix的存储术语，非Docker说的容器）的相关信息。这样Docker主机上用该卷插件建立的数据卷都会指向Nutanix后台的存储容器中；数据通过iSCSI协议连接Nutanix存储服务的时候，就可以利用到Nutanix群集提供的负载均衡能力；当数据块写入Nutanix存储池的过程中和之后，就可以利用到到Nutanix存储容器所具备的其它重要特性：数据块2~3副本的高可靠性、冷热数据分成、压缩、去重、纠删码等；而且存储空间对于容器或者Docker Swarm里的服务都是透明和无限容量的。</p>
+</blockquote>
+
+<p>现在做一些安装DVP的准备工作，向Nutanix系统管理员要求并记录下面的信息：</p>
+
+<ul>
+<li>获得Prism的界面访问 IP</li>
+<li>获得Nutanix群集数据服务的IP，这个IP是群集上的虚拟服务IP</li>
+<li>获得群集的用户名和密码</li>
+<li>新建一个测试存储容器，获得容器名</li>
+</ul>
+
+<p>以上信息会使用在DVP的安装命令中，DVP的离线安装方法：下载DVP插件镜像，保存成文件，ssh上传到模板虚拟机，用docker load命令加载安装。</p>
+
+<p>参考下面的DVP安装命令：</p>
+
+<pre><code>docker plugin install ntnx/nutanix_volume_plugin PRISM_IP=&quot;10.68.69.22&quot; DATASERVICES_IP=&quot;10.68.69.23&quot; PRISM_PASSWORD=&quot;nutanix/4u&quot; PRISM_USERNAME=&quot;admin&quot; DEFAULT_CONTAINER=&quot;ddc-sc1&quot; --alias nutanix
+</code></pre>
+
+<p>以上的命令执行结果如下：</p>
+
+<pre><code>[root@centos7-temp]# docker plugin install ntnx/nutanix_volume_plugin PRISM_IP=&quot;10.68.69.22&quot; DATASERVICES_IP=&quot;10.68.69.23&quot; PRISM_PASSWORD=&quot;nutanix/4u&quot; PRISM_USERNAME=&quot;admin&quot; DEFAULT_CONTAINER=&quot;ddc-sc1&quot; --alias nutanix
+Plugin &quot;ntnx/nutanix_volume_plugin&quot; is requesting the following privileges:
+ - network: [host]
+ - mount: [/dev]
+ - mount: [/lib/modules]
+ - mount: [/etc/iscsi]
+ - mount: [/var/lock/iscsi]
+ - mount: [/proc]
+ - allow-all-devices: [true]
+ - capabilities: [CAP_SYS_ADMIN CAP_SYS_PTRACE CAP_IPC_LOCK CAP_IPC_OWNER CAP_NET_ADMIN CAP_MKNOD CAP_SYS_MODULE]
+Do you grant the above permissions? [y/N] y （输入y，按回车）
+latest: Pulling from ntnx/nutanix_volume_plugin
+be892c8cb64d: Download complete
+Digest: sha256:5a3730ffae077eb6ddc0c125620283d56852528b686cbe42f2f58696eab82c0d
+Status: Downloaded newer image for ntnx/nutanix_volume_plugin:latest
+Installed plugin ntnx/nutanix_volume_plugin
+</code></pre>
+
+<p>确认VDP安装结果，这个插件应该是最新版、启动的状态，如下：</p>
+
+<pre><code>[root@centos7-temp]# docker plugin ls
+ID                  NAME                DESCRIPTION                        ENABLED
+f0e38fbc11b3        nutanix:latest      Nutanix volume plugin for docker   true
+</code></pre>
+
+<p>关于 docker plugin 的相关命令参考文档，<a href="https://docs.docker.com/edge/engine/reference/commandline/plugin_install/">见docker官网。</a></p>
+
+<p>执行下面的测试，确认DVP工作正常。</p>
+
+<pre><code>[root@centos7-temp]# docker volume create testvol -d nutanix:latest
+testvol
+[root@centos7-temp]# docker volume ls
+DRIVER              VOLUME NAME
+nutanix:latest      testvol
+[root@centos7-temp]#
+</code></pre>
+
+<p>回到Nutanix的Prisum界面（主要的群集管理图形化界面）中查看Storage &ndash;&gt; table  &ndash;&gt; Volume Group，应该能看到这个命令所创建的名为testvol的数据卷。如下图所示：</p>
+
+<p><img src="/media/14958993637032/Screen%20Shot%202017-06-20%20at%209.07.13%20PM.png" alt="Screen Shot 2017-06-20 at 9.07.13 P" /></p>
+
+<p>在命令行删除这个测试的卷。</p>
+
+<pre><code>[root@centos7-temp]# docker volume rm testvol
+testvol
+[root@centos7-temp]# docker volume ls
+DRIVER              VOLUME NAME
+[root@centos7-temp]#
+</code></pre>
+
+<p>在回到Prisum界面中查看刚才看到的那个卷应该就消失了。到此为止所有节点的DVP部署配置工作就完毕了，并且确认docker服务和DVP功能都很正常。用 sys-unconfig 命令关机，把这个虚拟机在Prisum里面做一个快照备用，也可以在Nutanix的nucli命令行里面把它做成一个基础镜像。</p>
+
+<h2 id="安装docker-for-datercenter">安装Docker For DaterCenter</h2>
+
+<p>我们已经理解和熟悉了DVP的基本操作，配置和部署，下面开始安装Docker Datacenter；Docker Datacenter的架构图如下所示：
+<img src="/media/14958993637032/14979754711332.jpg" alt="" /></p>
+
+<p>本文安装的架构是：</p>
+
+<ol>
+<li>一个 UCP manager 节点</li>
+<li>一个 DTR 节点</li>
+<li>两个 worker node 节点</li>
+</ol>
+
+<p>在Nutanix的Prisum中用刚才制作的那个快照或者镜像模板，克隆/新建4个虚拟机。虚拟机的参考配置如下：</p>
+
+<ul>
+<li>2 vCPU</li>
+<li>4GB RAM</li>
+<li>50GB Disk</li>
+</ul>
+
+<h3 id="安装ucp-docker-universal-control-plane-节点">安装UCP（Docker Universal Control Plane）节点</h3>
+
+<p>在Nutanix的Prisum中从刚才新建的四个虚拟机中选择一个，Power on开机；ssh登录到操作系统内之后，设定主机名和IP地址。</p>
+
+<p>安装配置参考文档：<a href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/install/install-offline/#download-the-offline-package">https://docs.docker.com/datacenter/ucp/2.1/guides/admin/install/install-offline/#download-the-offline-package</a></p>
+
+<p>注意事项，提前下载好安装包，这个tar包里面包含了UCP需要的所有镜像，可以一次性导入到UCP的节点上。</p>
+
+<p>下面是参考命令，在使用本文档时，请下载并安装最新版的Docker for Datacenter产品包。</p>
+
+<pre><code>wget https://packages.docker.com/caas/ucp_images_2.1.4.tar.gz -O docker-datacenter.tar.gz
+
+docker load &lt; docker-datacenter.tar.gz
+</code></pre>
+
+<p>载入完毕后，可以看到如下镜像。</p>
+
+<pre><code>[root@ucp-master ~]# docker images
+REPOSITORY              TAG                 IMAGE ID            CREATED             SIZE
+docker/ucp-metrics      2.1.4               e3e24ef156bd        3 weeks ago         92.2 MB
+docker/ucp-swarm        2.1.4               d8b51d6801e5        3 weeks ago         21 MB
+docker/ucp-hrm          2.1.4               38a19323327d        3 weeks ago         14.8 MB
+docker/ucp-etcd         2.1.4               9aa382502e19        3 weeks ago         38.5 MB
+docker/ucp-controller   2.1.4               5a852aa3039e        3 weeks ago         28 MB
+docker/ucp-dsinfo       2.1.4               66ee9368796a        3 weeks ago         159 MB
+docker/ucp              2.1.4               7a28dbfc44e4        3 weeks ago         19.1 MB
+docker/ucp              latest              7a28dbfc44e4        3 weeks ago         19.1 MB
+docker/ucp-cfssl        2.1.4               acdc1f147711        3 weeks ago         15.1 MB
+docker/ucp-compose      2.1.4               25775e989077        3 weeks ago         32.9 MB
+docker/ucp-auth-store   2.1.4               f27ad13dee6c        3 weeks ago         58.7 MB
+docker/ucp-agent        2.1.4               d716a096c331        3 weeks ago         22.5 MB
+docker/ucp-auth         2.1.4               1f4739cd3c08        3 weeks ago         25.1 MB
+[root@ucp-master ~]#
+</code></pre>
+
+<p>安装UCP的命令参考如下：</p>
+
+<pre><code>docker run --rm -it --name ucp \
+  -v /var/run/docker.sock:/var/run/docker.sock \
+  docker/ucp:2.1.4 install \
+  --host-address 10.68.69.12 \
+  --interactive
+</code></pre>
+
+<p>以上命令中10.68.69.12是UCP主机的ip地址，建议UCP使用固定IP。以上命令完毕后用浏览器访问这个IP。</p>
+
+<p>参考以下文档，完成UCP的安装步骤，其中需要到Docker网站获得30天的试用版许可证文件。</p>
+
+<p><a href="https://docs.docker.com/datacenter/ucp/2.1/guides/admin/install/">https://docs.docker.com/datacenter/ucp/2.1/guides/admin/install/</a></p>
+
+<p>能够正常登陆访问UCP之后，在首页下方点击 【Add Node】按钮，获得加其它节点到群集里的命令，参考命令如下：</p>
+
+<pre><code>docker swarm join \
+  --token SWMTKN-1-1310ah7gzj9e7bk6a5yobo2qyiwf93ybrd29flkved1zqydd6i-7pir0884sag5pjofwzjq5o1um \
+  10.68.69.12:2377
+</code></pre>
+
+<p>把以上命令记录在写字板中备用。</p>
+
+<h3 id="加3个节点到群集里">加3个节点到群集里</h3>
+
+<p>把剩下的三个虚拟机开机，进入操作系统后设定主机名和IP。其中的一个安装DTR（Docker镜像仓库）的节点建议使用固定IP。</p>
+
+<p>在每个操作系统里面用docker命令确认DVP是否正常。</p>
+
+<ul>
+<li>docker plugin ls</li>
+<li>docker volume ls</li>
+<li>systemctl status iscsid</li>
+</ul>
+
+<p>下面就可以把上一步所记录命令在命令行里面执行以下，完毕之后回到UCP的界面中查看是否它们已经添加成功。如下图所示：</p>
+
+<p><img src="/media/14958993637032/Screen%20Shot%202017-06-20%20at%209.49.32%20PM.png" alt="Screen Shot 2017-06-20 at 9.49.32 P" /></p>
+
+<h3 id="安装dtr-docker镜像仓库">安装DTR-Docker镜像仓库</h3>
+
+<p>在UCP首页的下方，找到并点击 【Install DTR】的按钮，取得安装命令（记得从清单中选择固定IP地址的DTR主机）；在登录DTR主机的控制台里面输入这个命令，命令如下：</p>
+
+<pre><code>docker run -it --rm \
+  docker/dtr:2.2.5 install \
+  --ucp-node 10.68.69.12 \
+  --ucp-insecure-tls
+</code></pre>
+
+<p>DTR节点没有离线安装的整合包，它需要联网下载很多相关镜像，如果网络速度不是很快的话，下载和安装的过程需要至少半个小时，过程中还需要输入UCP的管理员，用户名和密码。</p>
+
+<p>参考文档如：
+<a href="https://docs.docker.com/datacenter/dtr/2.2/guides/admin/install/#step-3-install-dtr">https://docs.docker.com/datacenter/dtr/2.2/guides/admin/install/#step-3-install-dtr</a></p>
+
+<p>DTR正常工作了以后，登录建立一个名为owncloud的镜像库，点击【New Rrepository】输入owncloud。
+在一个节点上下载owncloud镜像，添加新的tag，上传到这个镜像到镜像库里备用。参考命令如下：</p>
+
+<pre><code>docker login dtr.zenlab.local
+docker pull owncloud
+docker tag owncloud:latest dtr.zenlab.local/admin/owncloud:latest
+docker push dtr.zenlab.local/admin/owncloud:latest
+</code></pre>
+
+<p><img src="/media/14958993637032/Screen%20Shot%202017-06-20%20at%2010.10.13%20PM.png" alt="Screen Shot 2017-06-20 at 10.10.13 P" /></p>
+
+<p>注意：如果你的环境中没有DNS，就把dtr.zenlab.local换成DTR的IP地址。</p>
+
+<p>以上这个步骤主要是方便以后，反复使用和测试这个镜像的可能性，如果所有的节点都有高速的互联网链接，可以忽略以上步骤。</p>
+
+<p>如果你所在的实验环境是没有互联网连接的，你需要将OwnCloud的镜像下载并保存成tar包，然后在传到DTR里，这样群集里的所有节点就可以在DTR里就近获得这个镜像，并启动OwnCloud容器了</p>
+
+<h2 id="在docker-datacenter群集中使用dvp">在Docker Datacenter群集中使用DVP</h2>
+
+<p>这里使用UCP的图形化界面，在一个所有节点都配置和部署了VDP的群集上，给群集挂载外部Nutanix的数据卷。挂载的数据卷是给OwnCloud做持久存储用的。</p>
+
+<p>登录UCP主页，点击Resource，点击Volumes，点击 【Create Volume】，输入相关参数，如下图所示。图中的sizeMb=500000这个参数是制定VolumeGroup的大小，不设定这个参数的话，默认是10GB。
+<img src="/media/14958993637032/Screen%20Shot%202017-06-21%20at%2012.22.24%20AM.png" alt="Screen Shot 2017-06-21 at 12.22.24 A" /></p>
+
+<p>在到Nutanix的Prism里面查看这个Volume Group是否存在。应该如下图所示：</p>
+
+<p><img src="/media/14958993637032/Screen%20Shot%202017-06-21%20at%2012.23.32%20AM.png" alt="Screen Shot 2017-06-21 at 12.23.32 A" /></p>
+
+<h2 id="部署owncloud网盘服务">部署OwnCloud网盘服务</h2>
+
+<p>登录UCP主页，点击 Service ， 点击 【Create a Service】按钮；开始建立这个服务。输入服务名，镜像名；点击 【Next】按钮。</p>
+
+<p><img src="/media/14958993637032/Screen%20Shot%202017-06-20%20at%2010.49.10%20PM.png" alt="Screen Shot 2017-06-20 at 10.49.10 P" /></p>
+
+<p>点击 【Next】按钮。进入 Resource页面，这里需要配置端口和数据卷。
+<img src="/media/14958993637032/Screen%20Shot%202017-06-20%20at%2010.49.35%20PM.png" alt="Screen Shot 2017-06-20 at 10.49.35 P" /></p>
+
+<p><img src="/media/14958993637032/Screen%20Shot%202017-06-20%20at%2010.49.58%20PM.png" alt="Screen Shot 2017-06-20 at 10.49.58 P" /></p>
+
+<p>最后点击【Deploy Now】按钮。 部署完毕之后，显示这个服务的状态为正常。
+<img src="/media/14958993637032/Screen%20Shot%202017-06-21%20at%2012.25.51%20AM.png" alt="Screen Shot 2017-06-21 at 12.25.51 A" /></p>
+
+<p><img src="/media/14958993637032/Screen%20Shot%202017-06-20%20at%2010.52.28%20PM.png" alt="Screen Shot 2017-06-20 at 10.52.28 P" /></p>
+
+<p>点击这个服务，到这个页面的最下方，找到右下角的发布端口的链接，点击后，就可以看到ownCloud的初始化配置页面了。
+<img src="/media/14958993637032/Screen%20Shot%202017-06-20%20at%2010.53.24%20PM.png" alt="Screen Shot 2017-06-20 at 10.53.24 P" /></p>
+
+<p>输入管理员的用户名和密码，进入之后，上传一些图片，测试一下功能是否正常。</p>
+
+<p><img src="/media/14958993637032/Screen%20Shot%202017-06-20%20at%2010.54.06%20PM.png" alt="Screen Shot 2017-06-20 at 10.54.06 P" /></p>
+
+<p>尝试一些Docker Datacenter的高级功能，如服务的高可用性；同时Nutanix的DVP在底层保障了数据的持久性和完全性。测试步骤如下：</p>
+
+<ol>
+<li>找到运行owncloud的容器，删除这个容器</li>
+<li>在服务页面查看owncloud服务的状态变化</li>
+<li>等ownCloud的状态恢复正常之后</li>
+<li>再次登录ownCloud页面</li>
+<li>查看和确认刚才上传的文件是否还在</li>
+</ol>
+
+<h2 id="总结">总结</h2>
+
+<p>Nutanix是一种融合和了计算、存储和虚拟化（内置KVM）的超融合平台。Nutanix DVP (Docker Volume Plug-in)可以让平台里的容器用上持久化存储服务。DVP不仅可以给单独虚拟机里的容器提供持久卷服务，还能给类似于Docker Swarm的其它容器编排平台提供持久化数据服务功能。</p>
+
+<div class="alert 
+alert-warning"
+ 
+role="alert"><strong>以上步骤的验收标准：</strong> 可以在Nutanix上部署和运行Docker Datacenter，可以给Docker Datacenter的Swarm群集使用DVP持久存储，OwnCloud的网盘服务能高可用的存在和运行。</div>
+
+
+
+    
+    
+          <footer class=" footline" >
+	
+</footer>
+  </div>
+</div>
+
+<div id="navigation">
+<a class="nav nav-prev" href="/04-nucalm-advance/01-docker-swarm-cluster/" title="一键安装Docker Swarm群集"> <i class="fa fa-chevron-left"></i></a>
+    <a class="nav nav-next" href="/05-k8s/" title="Nutanix K8S相关功能" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a></div>
+
+</section>
+<div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+  <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+</div>    
+
+<script src="/js/clipboard.min.js"></script>
+<script src="/js/featherlight.min.js"></script>
+<script src="/js/html5shiv-printshiv.min.js"></script>
+<script src="/js/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+<script src="/js/modernizr.custom.71422.js"></script>
+<script src="/js/docdock.js"></script>
+<script src="/theme-original/script.js"></script>
+
+
+    
+
+    
+    
+
+    
+  </body>
+</html>

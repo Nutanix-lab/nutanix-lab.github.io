@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>基本配置 on Nutanix实验室</title>
+    <link>/00-getting-start/</link>
+    <description>Recent content in 基本配置 on Nutanix实验室</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    
+	<atom:link href="/00-getting-start/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>安装AHV群集</title>
+      <link>/00-getting-start/installation/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/00-getting-start/installation/</guid>
+      <description>AHV 20170830.58 需要最小的版本，这个版本是Nutanix Calm内置于PC中的起始版本。 安装配置好AHV Cluster，配置好两个服务IP，如下图所示。
+如果以上的数据服务IP不设置，在将AHV群集注册到PC里的时候会报错，而无法完成注册。
+以上步骤的验收标准： 能使用AHV群集默认的初始化密码登陆PE。 </description>
+    </item>
+    
+    <item>
+      <title>配置和部署AD</title>
+      <link>/00-getting-start/configuration/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/00-getting-start/configuration/</guid>
+      <description>AD或者LDAP服务器是配置PC的必备的服务，在使用PC提供的自助服务门户的时候，需要使用AD作为用户认证的来源。
+工作内容包括：
+ 建立SSP（自助服务）所需要的组和用户 建立管理员组：ssp_admin 建立用户组： ssp_user 在这两个组里建立若干个测试用户，用于测试SSP中的不同角色。  以上工作内容贯彻了下面文档的所有步骤，作为一次WorkShop中的完整的配置。如果你使用已有的AD服务器，请参考以上配置，并不需要建立以上的用户和组。
+ 建立的组如下图所示：
+用户和组建立完成之后的结果如下图所示：
+以上步骤的验收标准： 记录新建/已有测试账户的用户名和密码，每一个账户都可以成功地登陆AD域。 </description>
+    </item>
+    
+  </channel>
+</rss>

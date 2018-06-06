@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nutanix Calm基础功能 on Nutanix实验室</title>
+    <link>/02-nucalm-basic/</link>
+    <description>Recent content in Nutanix Calm基础功能 on Nutanix实验室</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    
+	<atom:link href="/02-nucalm-basic/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>初始化配置Calm</title>
+      <link>/02-nucalm-basic/01-configure-calm/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/02-nucalm-basic/01-configure-calm/</guid>
+      <description> AWS账户的配置 由于Calm是多云管理，因此很多已经在Nutanix商店里的蓝图都支持AWS的部署，下面需要配置一个假的AWS账户信息，这样在使用预定义蓝图的时候减少提示信息出现的机会。
+App页面里，左侧齿轮图标，进入AWS账户配置页面，点击 Add Setting 按钮。
+在这个页面中输入任一的 Access Key ID 和 Secret Access Key 字符串。保证点击Save后正确地保存了一条记录即可。 配置Calm项目 点击左侧最下面的图标，进入项目配置页面，点击 Create Project 按钮。
+输入该项目的相关信息：
+ 项目名称：可以是一个应用开发团队，或者一个业务应用一个项目 用户和角色信息：下图设置 ssp_user 组里的所有人的角色是 Developer，可以设置其他的AD用户为其它各种的Role 选中 Local and Cloud Resource 选这个项目默认使用的AHV cluster，选中该项目所能使用的网络 输入该项目的资源配额 选中刚才输入的AWS账户  点击 Save 按钮之后，选中页面中的 环境 那个标签
+在这个页面的连个标签页面中输入必要的信息，这里需要配置一个root账户信息，可以是用户名密码的，用在Calm登录虚拟机的时候。
+以上步骤的验收标准： 使用PC的默认用户名和密码成功登陆新安装的PC。 </description>
+    </item>
+    
+    <item>
+      <title>导入Nutanix Calm商店里的蓝图</title>
+      <link>/02-nucalm-basic/02-deploy-bp/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/02-nucalm-basic/02-deploy-bp/</guid>
+      <description>Nutanix Calm商店是在公网上的，点击左侧的图标，如果当前的这个Cluster可以上互联网就可以看到如图所示的应用清单，这些是Nutanix已经测试打包好的应用蓝图。
+选择若干种应用蓝图，选中那些项目需要使用这个蓝图，点击 Apply 之后，点击 Publish按钮，这样这个蓝图就下载并且导入到了本地的Calm应用商店里。
+下图是导入完之后的结果，点击左侧最上面的按钮后，可以看到本地应用商店的状态。 以上步骤的验收标准： 本地的应用商店里获取到了可以部署的应用蓝图，这些蓝图是成功地从互联网上下载到本地。 </description>
+    </item>
+    
+    <item>
+      <title>配置服务目录</title>
+      <link>/02-nucalm-basic/03-config-cat/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/02-nucalm-basic/03-config-cat/</guid>
+      <description>服务目录是为SSP用户提供的最基础的资源服务，下面是配置SSP用户可以访问到的ISO和磁盘镜像模板的方法。
+以SSP管理员用户身份登录。
+点击左侧的 Images ， 在镜像管理页面里，选择 Add Images 按钮，上传可以用于SSP的ISO和Disk镜像。选中其中需要通过服务目录展示给最终用户的镜像。 配置镜像在服务目录中看到的名字和描述。
+点击右侧的 Catalog Items 参考最后发布的效果。
+退出Admin用户，换SSP用户登录。下面是Developer用户角色能看到的内容。
+以上步骤的验收标准： 服务目录里的镜像可以供给SSP用户创建虚拟机。 </description>
+    </item>
+    
+    <item>
+      <title>创建虚拟机模板</title>
+      <link>/02-nucalm-basic/04-create-template/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/02-nucalm-basic/04-create-template/</guid>
+      <description>通过ISO光盘安装虚拟机 这个步骤是为测试Calm的蓝图做准备，安装一个CentOS 7 的虚拟机，并且把它转化成模板镜像。
+点击 Create VM 按钮，创建一个虚拟机。
+点击 Next 下面输入磁盘信息和CPU内存的配置信息。点 Save 按钮。 进入新创建虚拟机的控制台。
+在安装完的模板虚拟机里运行一下命令，方便后面的蓝图测试，把这些包装好，后面能更快速一些。
+yum install httpd mariadb-server mariadb php php-mysql php-gd nano wget bind-utils net-tools reboot  编辑 /etc/ssh/sshd_config 文件， 取消这一行的注释： PasswordAuthentication yes
+再次登录以后用 sys-unconfig 关机。 以下文档内容参考了 http://lab.digitalformula.net/；
+将测虚拟机磁盘转成模板镜像 ssh登录到AHV Cluster中的一个CVM。登录后执行acli命令，然后输入一下命令
+&amp;lt;acropolis&amp;gt; vm.get centos-tmp include_vmdisk_paths=1 centos-tmp { config { allow_live_migrate: True disk_list { addr { bus: &amp;quot;ide&amp;quot; index: 0 } cdrom: True device_uuid: &amp;quot;1fd10d29-0ac1-425d-99cc-ecffd6593fb2&amp;quot; empty: True } disk_list { addr { bus: &amp;quot;scsi&amp;quot; index: 0 } container_id: 418 container_uuid: &amp;quot;08e01b3e-1bfa-45e0-ba11-5155380e0b1f&amp;quot; device_uuid: &amp;quot;afe6d35e-97a1-4f16-976a-87fd4c702c2e&amp;quot; vmdisk_nfs_path: &amp;quot;/SelfServiceContainer/.</description>
+    </item>
+    
+  </channel>
+</rss>
